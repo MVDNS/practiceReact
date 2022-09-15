@@ -5,20 +5,8 @@
 	display: grid;
 	grid-template-areas: 
 	'h h'
-	'm p';
+	'n p';
 	grid-template-rows: 100px 1fr;
 	grid-template-columns: 2fr 10fr;
 	grid-gap: 10px;
-}
-
-.header{
-grid-area: h;
-}
-
-.menu{
-grid-area: m;
-}
-.profile{
-grid-area: h
-p;
 }

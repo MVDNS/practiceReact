@@ -1,0 +1,38 @@
+.navbar {
+		grid-area: n;
+}
+
+.list{
+	height: 100%;
+	padding: 15px;
+	background-color:	#ddd;
+	color: #9198b1;
+	text-align: center;
+	border-radius: 20px;
+}
+
+.item{
+	margin: 0 auto;
+	width: 160px;
+}
+
+.item:not(:last-child){
+	margin-bottom: 5px;
+}
+
+.link {
+	display: inline-block;
+	width: 100%;
+	padding: 10px 0;
+	border-radius: 10px;
+}
+
+.link:hover{
+	background-color: #2f80ed;
+	color: #fff;
+}
+
+.active {
+	background-color: #2f80ed;
+	color: #fff;
+}

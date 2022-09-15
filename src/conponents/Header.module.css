@@ -1,0 +1,15 @@
+.header {
+	grid-area: h;
+	background-color: #ddd;
+	display: flex;
+	align-items: center;
+	border-radius: 0 0 20px 20px;
+}
+
+.img {
+	width: 100px;
+}
+
+.companyName {
+	margin-right: 41px;
+}

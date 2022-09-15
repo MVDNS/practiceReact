@@ -1,15 +1,14 @@
-import '../block-style/header.css';
+import s from './Header.module.css';
+
 
 function Header() {
 	return (
-				<header className="header">
-				<div className="header-wrapper">
-					<div className="header__logo">
-						<img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" alt="" />
-						<div className="header__company">MVDNSS</div>
+				<header className={s.header}>
+					<img className={s.img} src='https://i.ibb.co/zVjHMcx/Pngtree-blue-samurai-head-esports-logo-4278445.png'/>
+					<div className={s.companyName}>MVDNSS</div>
+					<div className={s.title}>
+						<h1 className={s.text}>Profile</h1>
 					</div>
-					<div className="header__title">Profile</div>
-				</div>
 				</header>
 	)
 }
