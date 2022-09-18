@@ -1,0 +1,17 @@
+.post {
+	display: flex;
+	align-items: center;
+	column-gap: 15px;
+	margin-bottom: 20px;
+	background-color: #fff;
+	padding: 10px;
+	border-radius: 15px;
+}
+
+.avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 2px solid #ddd;
+}

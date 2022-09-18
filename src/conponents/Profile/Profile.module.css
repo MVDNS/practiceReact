@@ -1,0 +1,21 @@
+.profile {
+	padding: 15px;
+	width: 100%;
+	background-color: #ddd;
+	border-radius: 20px;
+}
+
+.data {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
