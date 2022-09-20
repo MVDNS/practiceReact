@@ -1,32 +1,30 @@
 
-import { NavLink } from 'react-router-dom';
+import Dialog from './Dialog/Dialog';
+import Message from './Message/Message';
 import s from './Dialogs.module.css';
-
-const activeLink = ({ isActive }) =>
-isActive ? `${s.btn} ${s.active}` : `${s.btn}`
 
 function Dialogs() {
 	return (
 			<div className={s.dialogs}>
 				<div className={s.allDialogs}>
 					<div className={s.dialog}>
-						<NavLink to='/dialogs/1' className={activeLink}>Дарья</NavLink>
+					<Dialog id='1' name='Дарья' />
 					</div>
 					<div className={s.dialog}>
-					<NavLink to='/dialogs/2' className={activeLink}>Ольга</NavLink>
+					<Dialog id='2' name='Ольга' />
 					</div>
 					<div className={s.dialog}>
-					<NavLink to='/dialogs/3' className={activeLink}>Сергей</NavLink>
+					<Dialog id='3' name='Сергей' />
 					</div>
 					<div className={s.dialog}>
-					<NavLink to='/dialogs/4' className={activeLink}>Максим</NavLink>
+					<Dialog id='4' name='Андрей' />
 					</div>
 				</div>
 				<div className={s.allMessages}>
-					<div className={`${s.message} ${s.hisMessage}`}>Привет!</div>
-					<div className={`${s.message} ${s.yourMessage}`}>Ку</div>
-					<div className={`${s.message} ${s.hisMessage}`}>Как твои дела?</div>
-					<div className={`${s.message} ${s.hisMessage}`}>Где пропадал?</div>
+					<Message message='Привет!' />
+					<Message message='Ку!' />
+					<Message message='Как твои дела?' />
+					<Message message='Где пропадал?' />
 				</div>
 			</div>
 	)

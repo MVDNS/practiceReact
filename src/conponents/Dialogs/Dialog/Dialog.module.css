@@ -1,0 +1,13 @@
+
+.btn{
+	display: inline-block;
+	width: 100%;
+	padding: 20px;
+	border-radius: 15px;
+	border: 1px solid #ddd;
+}
+
+.active {
+	background-color: #ddd;
+}
+
