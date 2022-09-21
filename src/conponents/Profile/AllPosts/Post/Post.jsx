@@ -1,6 +1,7 @@
 import s from './Post.module.css';
 
 function Post(props) {
+
 	return (
 		<div className={s.post}>
 			<div className={s.avatar}>
