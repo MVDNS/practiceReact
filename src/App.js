@@ -10,20 +10,19 @@ import Settings from './conponents/Settings/Settings';
 
 import { Routes, Route} from 'react-router-dom'
 
-function App() {
+function App(props) {
 	return (
-
 			<div className="app-wrapper">
 				<Header />
 				<Navbar />
 				<div className='app-content'>
-				<Routes>
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/dialogs/*" element={<Dialogs />} />
-                    <Route path="/friends" element={<Friends />} />
-                    <Route path="/music" element={<Music />} />
-                    <Route path="/settings" element={<Settings />} />
-                </Routes>
+					<Routes>
+            <Route path="/profile/*" element={<Profile key={props.id} posts={props.posts}/>} />
+            <Route path="/dialogs/*" element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+		        <Route path="/friends" element={<Friends />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/settings" element={<Settings />} />
+					</Routes>
 				</div>	
 			</div>
 
