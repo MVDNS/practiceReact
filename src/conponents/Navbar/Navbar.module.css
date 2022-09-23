@@ -1,14 +1,14 @@
 .navbar {
 		grid-area: n;
+		background-color:	#ddd;
+		color: #9198b1;
+		border-radius: 20px;
+		text-align: center;
 }
 
 .list{
-	height: 100%;
 	padding: 15px;
-	background-color:	#ddd;
-	color: #9198b1;
-	text-align: center;
-	border-radius: 20px;
+	margin-bottom: 30px;	
 }
 
 .item{

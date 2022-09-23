@@ -1,13 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import s from './Navbar.module.css';
+import FavoritFriends from './FavoritFriends/FavoritFriends'
 
 const activeLink = ({ isActive }) =>
 isActive ? `${s.link} ${s.active}` : `${s.link}`
 
-
-function Navbar() {
+function Navbar(props) {
 	return (
-
 		<nav className={s.navbar}>
 			<ul className={s.list}>
 				<li className={s.item}>
@@ -26,6 +25,7 @@ function Navbar() {
 					<NavLink to="/settings" className={activeLink}>Settings</NavLink>
 				</li>
 			</ul>
+			<FavoritFriends favorits={props.state.favorits}/>
 		</nav>
 
 	)
