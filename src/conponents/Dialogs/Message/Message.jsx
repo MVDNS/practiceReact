@@ -1,4 +1,3 @@
-
 import s from './Message.module.css';
 
 function Message(props) {

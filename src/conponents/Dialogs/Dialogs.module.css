@@ -20,8 +20,14 @@
 }
 
 .allMessages{
+	display: flex;
+	flex-direction: column;
 	border: 3px solid #fff;
 	border-radius: 15px;
 	padding: 15px;
+	justify-content: space-between;
+}
+.sendMessage{
+
 }
 
