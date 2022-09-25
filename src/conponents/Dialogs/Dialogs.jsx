@@ -7,8 +7,8 @@ import s from './Dialogs.module.css';
 
 
 function Dialogs(props) {
-	let dialogElement = props.state.dialogs.map( d => <div className={s.dialog}><Dialog id={d.id} name={d.name} avatar={d.avatar} /></div>)
-	let messageElement = props.state.messages.map( m => <Message message={m.message} />)
+	let dialogElement = props.dialogsPage.dialogs.map( d => <div className={s.dialog}><Dialog id={d.id} name={d.name} avatar={d.avatar} /></div>)
+	let messageElement = props.dialogsPage.messages.map( m => <Message message={m.message} />)
 
 	return (
 			<div className={s.dialogs}>
@@ -20,7 +20,10 @@ function Dialogs(props) {
 					{ messageElement }
 					</div>
 					<div className={s.blockSend}>
-						<SendPost />
+						<SendPost 
+									newMessageText={props.dialogsPage.newMessageText}
+									sendNewMessage={props.sendNewMessage}
+									stateMessageText ={props.stateMessageText}/>
 					</div>
 					
 				</div>

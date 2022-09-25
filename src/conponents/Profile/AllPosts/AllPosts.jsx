@@ -8,7 +8,7 @@ function AllPosts(props) {
 	let postElement = props.posts.map( p => <Post message={p.message}  like={p.likesCount}/>)
 	return (
 		<div className={s.allPosts}>
-				<CreatePost />
+				<CreatePost sendNewPost={props.sendNewPost} newPostText={props.newPostText} stateNewPost={props.stateNewPost}/>
 				{ postElement }
 		</div>
 	)

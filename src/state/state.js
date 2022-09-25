@@ -1,3 +1,5 @@
+import { rerenderDom } from "../render";
+
 let state = {
 	profilePage: {
 		posts: [
@@ -5,6 +7,7 @@ let state = {
 			{id: 2, message: 'this is second post', likesCount: 5},
 			{id: 3, message: 'this is third post', likesCount: 8},
 		],
+		newPostText: 'text',
 	},
 
 	dialogsPage: {
@@ -23,6 +26,7 @@ let state = {
 			{id: 4, message: 'Ку!'},
 			{id: 5, message: 'Нормально! А твои?'},
 		],
+		newMessageText: '',
 	},
 
 	asideBar: {
@@ -32,6 +36,37 @@ let state = {
 			{id: 3, name: "Дарья", avatar: 'https://klike.net/uploads/posts/2019-03/medium/1551511836_43.jpg'},
 		],
 	},
+}
+
+export let sendNewPost = () => {
+ let newPost = 
+ {id: 4, 
+	message: state.profilePage.newPostText, 
+	likesCount: 0,
+	}
+	state.profilePage.posts.push(newPost);
+	state.profilePage.newPostText = '';
+	rerenderDom(state);
+}
+
+export let stateNewPost = (text) => {
+	state.profilePage.newPostText = text;
+	rerenderDom(state)
+}
+
+
+export let sendNewMessage = () => {
+	let newMessage = {
+		id: 6, message: state.dialogsPage.newMessageText,
+	};
+	state.dialogsPage.messages.push(newMessage);
+	state.dialogsPage.newMessageText = '';
+	rerenderDom(state);
+}
+
+export let stateMessageText = (text) => {
+	state.dialogsPage.newMessageText = text;
+	rerenderDom(state);
 }
 
 export default state
