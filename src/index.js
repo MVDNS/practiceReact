@@ -1,9 +1,32 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from './state/state';
-import { rerenderDom } from './render';
-window.state = state;
-rerenderDom(state);
+import { BrowserRouter } from 'react-router-dom'
+import store from "./state/state"
+
+window.store = store;
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+let rerenderDom = (state) => {
+	root.render(
+		<React.StrictMode>
+			<BrowserRouter>
+				<App 
+				store={store.getState()} 
+				sendNewPost={store.sendNewPost.bind(store)} 
+				stateNewPost={store.stateNewPost.bind(store)}
+				sendNewMessage={store.sendNewMessage.bind(store)}															
+				stateMessageText = {store.stateMessageText.bind(store)}/>
+			</BrowserRouter>
+		</React.StrictMode>
+	);
+}
+rerenderDom(store.getState())
+store.subscribe(rerenderDom)
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

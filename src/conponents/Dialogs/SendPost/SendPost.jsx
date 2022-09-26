@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { stateMessageText } from '../../../state/state';
 import s from './SendPost.module.css';
 
 function SendPost(props) {
