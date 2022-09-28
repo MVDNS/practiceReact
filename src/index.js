@@ -16,10 +16,7 @@ let rerenderDom = (state) => {
 			<BrowserRouter>
 				<App 
 				store={store.getState()} 
-				sendNewPost={store.sendNewPost.bind(store)} 
-				stateNewPost={store.stateNewPost.bind(store)}
-				sendNewMessage={store.sendNewMessage.bind(store)}															
-				stateMessageText = {store.stateMessageText.bind(store)}/>
+				dispatch = {store.dispatch.bind(store)}/>
 			</BrowserRouter>
 		</React.StrictMode>
 	);

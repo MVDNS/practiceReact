@@ -37,7 +37,6 @@ let store = {
 			],
 		},
 	},
-	
 	_rerenderDom() {
 		console.log('gogogo')
 	},
@@ -45,7 +44,12 @@ let store = {
 	getState(){
 		return this._state;
 	},
-	sendNewPost(){
+	subscribe(observer){
+		this._rerenderDom = observer;
+	},
+	
+
+	_sendNewPost(){
 		let newPost = 
 		{id: 4, 
 		 message: this._state.profilePage.newPostText, 
@@ -55,11 +59,11 @@ let store = {
 		 this._state.profilePage.newPostText = '';
 		 this._rerenderDom(this._state);
 	},
-	stateNewPost(text){
+	_stateNewPost(text){
 		this._state.profilePage.newPostText = text;
 		this._rerenderDom(this._state)
 	},
-	sendNewMessage(){
+	_sendNewMessage(){
 		let newMessage = {
 			id: 6, message: this._state.dialogsPage.newMessageText,
 		};
@@ -67,13 +71,31 @@ let store = {
 		this._state.dialogsPage.newMessageText = '';
 		this._rerenderDom(this._state);
 	},
-	stateMessageText(text){
+	_stateMessageText(text){
 		this._state.dialogsPage.newMessageText = text;
 		this._rerenderDom(this._state);
 	},
-	subscribe(observer){
-		this._rerenderDom = observer;
-	},
+
+	dispatch(action){
+
+		if(action.type === 'SEND-NEW-MESSAGE'){
+			let newMessage = {
+				id: 6, message: this._state.dialogsPage.newMessageText,
+			};
+			this._state.dialogsPage.messages.push(newMessage);
+			this._state.dialogsPage.newMessageText = '';
+			this._rerenderDom(this._state);
+
+		}else if(action.type === 'STATE-MESSAGE-TEXT'){
+			this._state.dialogsPage.newMessageText = action.text;
+			this._rerenderDom(this._state);
+
+		}else if(action.type === 'SEND-NEW-POST'){
+			this._sendNewPost();
+		}else if(action.type === 'STATE-NEW-POST'){
+			this._stateNewPost(action.text)
+		}
+	}
 }
 
 
