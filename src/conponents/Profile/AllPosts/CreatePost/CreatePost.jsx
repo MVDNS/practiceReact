@@ -1,17 +1,21 @@
 import React from "react";
 import s from "./CreatePost.module.css";
 
+import {
+  updateStateNewPost,
+  addSendNewPost,
+} from "../../../../state/profileReducer";
+
 function CreatePost(props) {
   let newPost = React.createRef();
 
   let addPost = () => {
-    props.dispatch({ type: "SEND-NEW-POST" });
+    props.dispatch(addSendNewPost());
   };
 
   let updateStatePostText = () => {
     let text = newPost.current.value;
-    let action = { type: "STATE-NEW-POST", text: text };
-    props.dispatch(action);
+    props.dispatch(updateStateNewPost(text));
   };
 
   return (

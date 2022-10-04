@@ -1,17 +1,19 @@
 import React from "react";
 import s from "./SendPost.module.css";
+import {
+  addSendNewMessage,
+  updateStateNewMessage,
+} from "../../../state/dialogsReducer";
 
 function SendPost(props) {
   let newMessage = React.createRef();
 
   let addMessage = () => {
-    props.dispatch({ type: "SEND-NEW-MESSAGE" });
+    props.dispatch(addSendNewMessage());
   };
-
   let updateStateMessageText = () => {
     let text = newMessage.current.value;
-    let action = { type: "STATE-MESSAGE-TEXT", text: text };
-    props.dispatch(action);
+    props.dispatch(updateStateNewMessage(text));
   };
 
   return (
