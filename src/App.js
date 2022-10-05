@@ -14,15 +14,15 @@ function App(props) {
 	return (
 			<div className="app-wrapper">
 				<Header />
-				<Navbar state={props.store.asideBar} />
+				<Navbar state={props.state.asideBar} />
 				<div className='app-content'>
 					<Routes>
             <Route path="/profile/*" element={<Profile
-																								profilePage={props.store.profilePage} 
+																								profilePage={props.state.profilePage} 
 																								dispatch={props.dispatch}
 																								/>} />
             <Route path="/dialogs/*" element={<Dialogs 
-																								dialogsPage={props.store.dialogsPage}
+																								dialogsPage={props.state.dialogsPage}
 																								dispatch={props.dispatch}
 																								/>}/>
 		        <Route path="/friends" element={<Friends />} />
