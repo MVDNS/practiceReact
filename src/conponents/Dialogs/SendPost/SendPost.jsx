@@ -1,19 +1,15 @@
 import React from "react";
 import s from "./SendPost.module.css";
-import {
-  addSendNewMessage,
-  updateStateNewMessage,
-} from "../../../state/dialogsReducer";
 
 function SendPost(props) {
   let newMessage = React.createRef();
 
-  let addMessage = () => {
-    props.dispatch(addSendNewMessage());
+  let onAddMessage = () => {
+    props.addSendNewMessage();
   };
-  let updateStateMessageText = () => {
+  let onUpdateText = () => {
     let text = newMessage.current.value;
-    props.dispatch(updateStateNewMessage(text));
+    props.updateStateNewMessage(text);
   };
 
   return (
@@ -23,7 +19,7 @@ function SendPost(props) {
         <textarea
           className={s.textarea}
           ref={newMessage}
-          onChange={updateStateMessageText}
+          onChange={onUpdateText}
           value={props.newMessageText}
           placeholder="Ваше сообщение..."
           name="textarea"
@@ -31,7 +27,7 @@ function SendPost(props) {
           cols="3"
           rows="1"
         ></textarea>
-        <button className={s.submit} onClick={addMessage}>
+        <button className={s.submit} onClick={onAddMessage}>
           <span className={s.btnText}>Отправить</span>
         </button>
       </div>

@@ -11,11 +11,7 @@ function Profile(props) {
         birthday="12.12.1990"
         city="Moscow"
       />
-      <AllPosts
-        posts={props.profilePage.posts}
-        newPostText={props.profilePage.newPostText}
-        dispatch={props.dispatch}
-      />
+      <AllPosts store={props.store} />
     </div>
   );
 }

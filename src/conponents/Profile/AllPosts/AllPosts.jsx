@@ -1,15 +1,16 @@
 import Post from "./Post/Post";
-import CreatePost from "./CreatePost/CreatePost";
+import CreatePostContainer from "./CreatePost/CreatePostContainer";
 
 import s from "./AllPosts.module.css";
 
 function AllPosts(props) {
-  let postElement = props.posts.map((p) => (
+  let state = props.store.getState().profilePage;
+  let postElement = state.posts.map((p) => (
     <Post message={p.message} like={p.likesCount} />
   ));
   return (
     <div className={s.allPosts}>
-      <CreatePost sendNewPost={props.sendNewPost} dispatch={props.dispatch} />
+      <CreatePostContainer store={props.store} />
       {postElement}
     </div>
   );

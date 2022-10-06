@@ -1,15 +1,16 @@
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import SendPost from "./SendPost/SendPost";
+import SendPostContainer from "./SendPost/SendPostContainer";
 import s from "./Dialogs.module.css";
 
 function Dialogs(props) {
-  let dialogElement = props.dialogsPage.dialogs.map((d) => (
+  let state = props.store.getState().dialogsPage;
+  let dialogElement = state.dialogs.map((d) => (
     <div className={s.dialog}>
       <Dialog id={d.id} name={d.name} avatar={d.avatar} />
     </div>
   ));
-  let messageElement = props.dialogsPage.messages.map((m) => (
+  let messageElement = state.messages.map((m) => (
     <Message message={m.message} />
   ));
 
@@ -19,10 +20,7 @@ function Dialogs(props) {
       <div className={s.allMessages}>
         <div className={s.blockMessage}>{messageElement}</div>
         <div className={s.blockSend}>
-          <SendPost
-            newMessageText={props.dialogsPage.newMessageText}
-            dispatch={props.dispatch}
-          />
+          <SendPostContainer store={props.store} />
         </div>
       </div>
     </div>

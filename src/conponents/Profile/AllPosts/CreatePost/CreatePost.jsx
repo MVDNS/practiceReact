@@ -1,21 +1,16 @@
 import React from "react";
 import s from "./CreatePost.module.css";
 
-import {
-  updateStateNewPost,
-  addSendNewPost,
-} from "../../../../state/profileReducer";
-
 function CreatePost(props) {
   let newPost = React.createRef();
 
-  let addPost = () => {
-    props.dispatch(addSendNewPost());
+  let onAddPost = () => {
+    props.addSendNewPost();
   };
 
-  let updateStatePostText = () => {
+  let onUpdateText = () => {
     let text = newPost.current.value;
-    props.dispatch(updateStateNewPost(text));
+    props.updateStateNewPost(text);
   };
 
   return (
@@ -24,7 +19,7 @@ function CreatePost(props) {
       <textarea
         className={s.textarea}
         ref={newPost}
-        onChange={updateStatePostText}
+        onChange={onUpdateText}
         value={props.newPostText}
         placeholder="Ваше сообщение..."
         name="textarea"
@@ -32,7 +27,7 @@ function CreatePost(props) {
         cols="3"
         rows="4"
       ></textarea>
-      <button className={s.submit} onClick={addPost}>
+      <button className={s.submit} onClick={onAddPost}>
         <span className={s.btnText}>Отправить</span>
       </button>
     </div>
