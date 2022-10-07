@@ -5,21 +5,28 @@ import {
   updateStateNewMessage,
 } from "../../../state/dialogsReducer";
 
-function SendPostContainer(props) {
-  let addMessage = () => {
-    props.store.dispatch(addSendNewMessage());
-  };
-  let updateStateMessageText = (text) => {
-    props.store.dispatch(updateStateNewMessage(text));
-  };
+import { connect } from "react-redux";
 
-  return (
-    <SendPost
-      addSendNewMessage={addMessage}
-      updateStateNewMessage={updateStateMessageText}
-      newMessageText={props.store.getState().dialogsPage.newMessageText}
-    />
-  );
-}
+const mapStateToProps = (state) => {
+  return {
+    newMessageText: state.dialogsPage.newMessageText,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addSendNewMessage: () => {
+      dispatch(addSendNewMessage());
+    },
+    updateStateNewMessage: (text) => {
+      dispatch(updateStateNewMessage(text));
+    },
+  };
+};
+
+const SendPostContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SendPost);
 
 export default SendPostContainer;

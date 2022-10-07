@@ -10,7 +10,7 @@ function AllPosts(props) {
   ));
   return (
     <div className={s.allPosts}>
-      <CreatePostContainer store={props.store} />
+      <CreatePostContainer />
       {postElement}
     </div>
   );

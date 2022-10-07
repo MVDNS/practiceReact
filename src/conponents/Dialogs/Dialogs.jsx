@@ -20,7 +20,7 @@ function Dialogs(props) {
       <div className={s.allMessages}>
         <div className={s.blockMessage}>{messageElement}</div>
         <div className={s.blockSend}>
-          <SendPostContainer store={props.store} />
+          <SendPostContainer />
         </div>
       </div>
     </div>

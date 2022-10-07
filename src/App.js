@@ -14,7 +14,7 @@ function App(props) {
 	return (
 			<div className="app-wrapper">
 				<Header />
-				<Navbar state={props.state.asideBar} />
+				<Navbar/>
 				<div className='app-content'>
 					<Routes>
             <Route path="/profile/*" element={<Profile

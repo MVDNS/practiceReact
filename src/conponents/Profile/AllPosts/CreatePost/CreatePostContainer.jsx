@@ -6,22 +6,28 @@ import {
   addSendNewPost,
 } from "../../../../state/profileReducer";
 
-function CreatePostContainer(props) {
-  let addPost = () => {
-    props.store.dispatch(addSendNewPost());
-  };
+import { connect } from "react-redux";
 
-  let updateStatePostText = (text) => {
-    props.store.dispatch(updateStateNewPost(text));
+const mapStateToProps = (state) => {
+  return {
+    newPostText: state.profilePage.newPostText,
   };
+};
 
-  return (
-    <CreatePost
-      addSendNewPost={addPost}
-      updateStateNewPost={updateStatePostText}
-      newPostText={props.store.getState().profilePage.newPostText}
-    />
-  );
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addSendNewPost: () => {
+      dispatch(addSendNewPost());
+    },
+    updateStateNewPost: (text) => {
+      dispatch(updateStateNewPost(text));
+    },
+  };
+};
+
+const CreatePostContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreatePost);
 
 export default CreatePostContainer;
