@@ -7,31 +7,20 @@ import { BrowserRouter } from 'react-router-dom'
 import store from "./state/redux-store"
 import { Provider } from 'react-redux'
 
-window.store = store;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-let rerenderDom = (state) => {
 
 	root.render(
 		<React.StrictMode>
 			<BrowserRouter>
 				<Provider store={store}>
 					<App 
-					state={state}
+
 					store={store}/>
 				</Provider>
 			</BrowserRouter>
 		</React.StrictMode>
 	);
-}
-
-rerenderDom(store.getState())
-
-store.subscribe(() => {
-	let state = store.getState()
-	rerenderDom(state)
-})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

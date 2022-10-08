@@ -1,3 +1,4 @@
+
 const SEND_NEW_POST = 'SEND-NEW-POST';
 const STATE_NEW_POST = 'STATE-NEW-POST';
 
@@ -12,20 +13,25 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
+		let stateCopy = {
+			...state,
+			posts: [...state.posts]
+		}
+
 	switch(action.type) {
 		case SEND_NEW_POST: 
 			let newPost = 
 			{	
 				id: 4, 
-				message: state.newPostText, 
+				message: stateCopy.newPostText, 
 				likesCount: 0,
 			}
-			state.posts.push(newPost);
-			state.newPostText = '';
-			return state;
-			case STATE_NEW_POST: 
-				state.newPostText = action.text;
-				return state;
+				stateCopy.newPostText = '';
+				stateCopy.posts.unshift(newPost);
+				return stateCopy;
+			case STATE_NEW_POST:
+				stateCopy.newPostText = action.text;
+				return stateCopy;
 			default:
 				return state;
 	}

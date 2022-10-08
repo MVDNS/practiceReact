@@ -2,6 +2,7 @@ import React from "react";
 import s from "./SendPost.module.css";
 
 function SendPost(props) {
+  console.log(props);
   let newMessage = React.createRef();
 
   let onAddMessage = () => {
@@ -20,7 +21,7 @@ function SendPost(props) {
           className={s.textarea}
           ref={newMessage}
           onChange={onUpdateText}
-          value={props.newMessageText}
+          value={props.dialogsPage.newMessageText}
           placeholder="Ваше сообщение..."
           name="textarea"
           maxLength="400"

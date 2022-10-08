@@ -1,8 +1,8 @@
-import AllPosts from "./AllPosts/AllPosts";
+import MyPostContainer from "./MyPost/MyPostContainer";
 import DataInfo from "./DataInfo/DataInfo";
 import s from "./Profile.module.css";
 
-function Profile(props) {
+function Profile() {
   return (
     <div className={s.profile}>
       <DataInfo
@@ -11,7 +11,7 @@ function Profile(props) {
         birthday="12.12.1990"
         city="Moscow"
       />
-      <AllPosts store={props.store} />
+      <MyPostContainer />
     </div>
   );
 }

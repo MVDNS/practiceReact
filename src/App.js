@@ -3,7 +3,7 @@ import './reset.css'
 import Header from './conponents/Header/Header';
 import Navbar from './conponents/Navbar/Navbar';
 import Profile from './conponents/Profile/Profile';
-import Dialogs from './conponents/Dialogs/Dialogs';
+import DialogsContainer from './conponents/Dialogs/DialogsContainer';
 import Friends from './conponents/Friends/Friends';
 import Music from './conponents/Music/Music';
 import Settings from './conponents/Settings/Settings';
@@ -17,12 +17,8 @@ function App(props) {
 				<Navbar/>
 				<div className='app-content'>
 					<Routes>
-            <Route path="/profile/*" element={<Profile
-																								store={props.store}
-																								/>} />
-            <Route path="/dialogs/*" element={<Dialogs 
-																								store={props.store}
-																								/>}/>
+            <Route path="/profile/*" element={<Profile />} />
+            <Route path="/dialogs/*" element={<DialogsContainer />}/>
 		        <Route path="/friends" element={<Friends />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />

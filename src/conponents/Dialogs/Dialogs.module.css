@@ -15,6 +15,13 @@
 	padding: 15px;
 }
 
+.allDialogs div{
+	margin-bottom: 15px;
+}
+.allDialogs div:last-child{
+	margin-bottom: 0px;
+}
+
 .dialog{
 	margin-bottom: 10px;
 }
@@ -28,6 +35,53 @@
 	justify-content: space-between;
 }
 .sendMessage{
-
+margin-top: 0;
 }
+
+.send {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 10px;
+}
+
+.title{
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.block {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline
+}
+.textarea {
+	flex-grow: 1;
+	resize: none;
+	background-color: #ddd;
+	font-size: 14px;
+	padding: 10px;
+	border-radius: 10px;
+	margin-right: 10px;
+}
+
+.textarea:focus {
+	outline: none;
+}
+
+.submit {
+	width: 120px;
+	height: 30px;
+	padding: 0 7px;
+	background-color: #2f80ed;
+	color: #fff;
+	border-radius: 10px;
+}
+
+.btnText{
+	position: relative;
+	top: -1px;
+}
+
 
