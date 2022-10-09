@@ -19,6 +19,11 @@ function Navbar(props) {
             Messages
           </NavLink>
         </li>
+				<li className={s.item}>
+          <NavLink to="/users" className={activeLink}>
+            Users
+          </NavLink>
+        </li>
         <li className={s.item}>
           <NavLink to="/friends" className={activeLink}>
             Friends

@@ -4,13 +4,12 @@ import Message from "./Message/Message";
 import s from "./Dialogs.module.css";
 
 function Dialogs(props) {
-  console.log(props.dialogsPage);
-  let dialogElement = props.dialogsPage.dialogs.map((d) => (
+  let dialogElement = props.dialogs.map((d) => (
     //<div className={s.dialog} key={d.id}>
     <Dialog id={d.id} name={d.name} avatar={d.avatar} key={d.id} />
     //</div>
   ));
-  let messageElement = props.dialogsPage.messages.map((m) => (
+  let messageElement = props.messages.map((m) => (
     <Message message={m.message} key={m.id} />
   ));
 
@@ -29,7 +28,7 @@ function Dialogs(props) {
       <div className={s.allDialogs}>{dialogElement}</div>
       <div className={s.allMessages}>
         <div className={s.blockMessage}>
-          <div className="a">{messageElement}</div>
+          <div className="">{messageElement}</div>
         </div>
         <div className={s.blockSend}>
           <div className={s.send}>
@@ -39,7 +38,7 @@ function Dialogs(props) {
                 className={s.textarea}
                 ref={newMessage}
                 onChange={onUpdateText}
-                value={props.dialogsPage.newMessageText}
+                value={props.newMessageText}
                 placeholder="Ваше сообщение..."
                 name="textarea"
                 maxLength="400"
