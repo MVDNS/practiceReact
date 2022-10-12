@@ -4,7 +4,6 @@ import {
   addSendNewMessage,
   updateStateNewMessage,
 } from "./../../state/dialogsReducer";
-import { startTransition } from "react";
 
 const useStateToProps = (state) => {
   return {

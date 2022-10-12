@@ -3,15 +3,41 @@ import s from "./Users.module.css";
 import * as axios from 'axios';
 import userPhoto from '../../assets/usersAvatar/user_avatar.png'
 
+
 function Users(props) {
+ 
 	const axios = require('axios').default;
 	if(props.users.length === 0){
-		axios.get('https://social-network.samuraijs.com/api/1.0/users', {params: {count: 4}})
+		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.countUsersPage}`)
 		.then( response => {
-			console.log(response.data.items)
+			console.log(response)
+			props.setUsers(response.data.items)
+			props.setTotalCountUsers(12)
+		} )
+	}
+
+	const onChengedPage = (page) => {
+		props.setCurrentPage(page)
+		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${props.countUsersPage}`)
+		.then( response => {
+			console.log(response)
 			props.setUsers(response.data.items)
 		} )
 	}
+
+	let pageCount = Math.ceil( props.totalCountUsers / props.countUsersPage);
+
+	let pages  = [];
+	for(let i = 1; i <= pageCount; i++){
+		pages.push(i);
+	}
+
+	let pagesButton = pages.map( (p) => {
+		return (
+			<button key={p} className={props.currentPage === p ? s.activeBtn : ''} onClick={() => {onChengedPage(p)}}>{p}</button>
+		)
+	})
+
 
 
   let usersElement = props.users.map((u) => (
@@ -36,7 +62,12 @@ function Users(props) {
     </div>
   ));
 
-  return <div className={s.usersContainer}>{usersElement}</div>;
+  return(
+		 <div className={s.usersContainer}>
+			{pagesButton}
+			{usersElement}
+		</div>
+	)
 }
 
 export default Users;

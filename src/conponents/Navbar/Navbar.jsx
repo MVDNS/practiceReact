@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import s from "./Navbar.module.css";
-import FavoritFriends from "./FavoritFriends/FavoritFriends";
+//import FavoritFriends from "./FavoritFriends/FavoritFriends";
 
 const activeLink = ({ isActive }) =>
   isActive ? `${s.link} ${s.active}` : `${s.link}`;
