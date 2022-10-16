@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./Users.module.css";
+import { NavLink } from "react-router-dom";
 import userPhoto from '../../assets/usersAvatar/user_avatar.png'
 import Preloader from '../../preloader/Preloader'
 
@@ -23,7 +24,9 @@ function Users(props) {
     <div className={s.userBlock} key={u.id}>
       <div className={s.info}>
         <div className={s.avatar}>
+					<NavLink to={`/profile/${u.id}`}>
           <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="avatar" />
+					</NavLink>
         </div>
         <div className={s.description}>
           <div className={s.name}>{u.name}</div>

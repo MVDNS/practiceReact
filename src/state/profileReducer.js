@@ -1,9 +1,11 @@
 
 const SEND_NEW_POST = 'SEND-NEW-POST';
 const STATE_NEW_POST = 'STATE-NEW-POST';
+const SET_PROFILE = 'SET_PROFILE';
 
 
 let initialState = {
+	profile: null,
 	posts: [
 		{ id: 1, message: 'this is first post', likesCount: 1 },
 		{ id: 2, message: 'this is second post', likesCount: 5 },
@@ -14,6 +16,11 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case SET_PROFILE:
+			return {
+				...state,
+				profile: action.profile,
+			}
 		case SEND_NEW_POST:
 			let newPost =
 			{
@@ -37,10 +44,17 @@ const profileReducer = (state = initialState, action) => {
 
 }
 
+export const setProfileUser = (profile) => {
+	return {
+		type: SET_PROFILE,
+		profile
+	}
+}
+
 export const updateStateNewPost = (text) => {
 	return {
 		type: STATE_NEW_POST,
-		text: text,
+		text
 	}
 }
 
