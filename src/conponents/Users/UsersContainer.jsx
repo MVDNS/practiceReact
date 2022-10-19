@@ -9,7 +9,7 @@ class UsersAPIContainer extends React.Component {
 	componentDidMount() {
 		if(this.props.users.length === 0){
 			this.props.toggleIsFecth(true)
-			axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`)
+			axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`, {withCredentials: true})
 			.then( response => {
 				console.log(response)
 				this.props.toggleIsFecth(false)

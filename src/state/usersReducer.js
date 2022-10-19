@@ -12,7 +12,7 @@ let initialState = {
 	currentPage: 1,
 	isFetch: false,
 }
-
+//
 const usersReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FOLLOW: {
