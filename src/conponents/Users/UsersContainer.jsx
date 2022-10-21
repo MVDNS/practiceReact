@@ -2,18 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import { followAC, setCurrentPageAC, setTotalCountUsersAC, setUsersAC, unFollowAC, toggleIsFetchAC } from "../../state/usersReducer";
-const axios = require('axios').default;
+import {getPage} from '../../api/api'
 
 class UsersAPIContainer extends React.Component {
 
 	componentDidMount() {
 		if(this.props.users.length === 0){
 			this.props.toggleIsFecth(true)
-			axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`, {withCredentials: true})
+			getPage(this.props.currentPage, this.props.countUsersPage)
 			.then( response => {
 				console.log(response)
 				this.props.toggleIsFecth(false)
-				this.props.setUsers(response.data.items)
+				this.props.setUsers(response.items)
 				this.props.setTotalCountUsers(12)
 			} )
 		}
@@ -22,11 +22,11 @@ class UsersAPIContainer extends React.Component {
 	onChengedPage = (page) => {
 			this.props.setCurrentPage(page)
 			this.props.toggleIsFecth(true)
-			axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.countUsersPage}`)
+			getPage(page, this.props.countUsersPage)
 			.then( response => {
 				console.log(response)
 				this.props.toggleIsFecth(false)
-				this.props.setUsers(response.data.items)
+				this.props.setUsers(response.items)
 			} )
 		}
 
