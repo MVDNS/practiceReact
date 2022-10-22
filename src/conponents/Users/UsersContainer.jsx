@@ -2,14 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import { followAC, setCurrentPageAC, setTotalCountUsersAC, setUsersAC, unFollowAC, toggleIsFetchAC, toggleIsFollowProcess } from "../../state/usersReducer";
-import {getPage} from '../../api/api'
+import {UserApi} from '../../api/api'
 
 class UsersAPIContainer extends React.Component {
 
 	componentDidMount() {
 		if(this.props.users.length === 0){
 			this.props.toggleIsFecth(true)
-			getPage(this.props.currentPage, this.props.countUsersPage)
+			UserApi.getPage(this.props.currentPage, this.props.countUsersPage)
 			.then( response => {
 				console.log(response)
 				this.props.toggleIsFecth(false)
@@ -22,7 +22,7 @@ class UsersAPIContainer extends React.Component {
 	onChengedPage = (page) => {
 			this.props.setCurrentPage(page)
 			this.props.toggleIsFecth(true)
-			getPage(page, this.props.countUsersPage)
+			UserApi.getPage(page, this.props.countUsersPage)
 			.then( response => {
 				console.log(response)
 				this.props.toggleIsFecth(false)

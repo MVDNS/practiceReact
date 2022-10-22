@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import { NavLink } from "react-router-dom";
 import userPhoto from '../../assets/usersAvatar/user_avatar.png'
 import Preloader from '../../preloader/Preloader'
-import {getFollow, getUnfollow} from '../../api/api'
+import {UserApi} from '../../api/api'
 
 function Users(props) {
 	let pageCount = Math.ceil( props.totalCountUsers / props.countUsersPage);
@@ -41,7 +41,7 @@ function Users(props) {
 				{u.followed ? 
 				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => {
 					props.toggleIsFollow(true, u.id)
-					getUnfollow(u.id)
+					UserApi.getUnfollow(u.id)
 					.then( response => {
 						if(response.resultCode === 0){
 							props.unFollowUser(u.id)
@@ -51,7 +51,7 @@ function Users(props) {
 				}}>Отписаться</button>) : 
 				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => {
 					props.toggleIsFollow(true, u.id)
-					getFollow(u.id)
+					UserApi.getFollow(u.id)
 						.then( response => {
 							if(response.resultCode === 0){
 								props.followUser(u.id)

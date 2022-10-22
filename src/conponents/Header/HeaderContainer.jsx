@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header'
 import { setAuthUserDate} from '../../state/authReducer'
-import { authAxios } from '../../api/api'
+import { UserApi } from '../../api/api'
  
 class HeaderContainer extends React.Component {
 
 	componentDidMount () {
-			authAxios()
+		UserApi.authAxios()
 			.then( response => {
 				console.log(response)
 				if(response.resultCode === 0) {

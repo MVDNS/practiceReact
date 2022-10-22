@@ -8,30 +8,39 @@ const instanse = axios.create({
 	}
 })
 
-export const authAxios = () => {
-	return instanse.get(`auth/me`)
-		.then(response => {
-			return response.data
-		})
-}
+export const UserApi = {
+	authAxios() {
+		return instanse.get(`auth/me`)
+			.then(response => {
+				return response.data
+			})
+	},
 
-export const getFollow = (id) => {
-	return instanse.post(`follow/${id}`)
-		.then(response => {
-			return response.data
-		})
-}
+	getUserProfile(userId) {
+		return instanse.get(`profile/${userId}`)
+			.then(response => {
+				return response.data
+			})
+	},
 
-export const getUnfollow = (id) => {
-	return instanse.delete(`follow/${id}`)
-		.then(response => {
-			return response.data
-		})
-}
+	getUnfollow(id) {
+		return instanse.delete(`follow/${id}`)
+			.then(response => {
+				return response.data
+			})
+	},
 
-export const getPage = (currentPage = 1, countUsersPage = 4) => {
-	return instanse.get(`users?page=${currentPage}&count=${countUsersPage}`)
-		.then(response => {
-			return response.data
-		})
+	getFollow(id) {
+		return instanse.post(`follow/${id}`)
+			.then(response => {
+				return response.data
+			})
+	},
+
+	getPage(currentPage = 1, countUsersPage = 4) {
+		return instanse.get(`users?page=${currentPage}&count=${countUsersPage}`)
+			.then(response => {
+				return response.data
+			})
+	}
 }
