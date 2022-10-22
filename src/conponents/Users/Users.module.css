@@ -69,6 +69,10 @@
 	background-color: #5797ea;
 }
 
+.btn:disabled {
+	background-color: #5797ea;
+}
+
 .activeBtn {
 	font-weight: bold;
 }

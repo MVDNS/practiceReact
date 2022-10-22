@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
-import { followAC, setCurrentPageAC, setTotalCountUsersAC, setUsersAC, unFollowAC, toggleIsFetchAC } from "../../state/usersReducer";
+import { followAC, setCurrentPageAC, setTotalCountUsersAC, setUsersAC, unFollowAC, toggleIsFetchAC, toggleIsFollowProcess } from "../../state/usersReducer";
 import {getPage} from '../../api/api'
 
 class UsersAPIContainer extends React.Component {
@@ -40,6 +40,9 @@ class UsersAPIContainer extends React.Component {
 			isFetch={this.props.isFetch}
 			followUser={this.props.followUser}
 			unFollowUser={this.props.unFollowUser}
+			toggleIsFollow={this.props.toggleIsFollow}
+			isFollowProcess={this.props.isFollowProcess}
+			
 			/>
 		)
 	}
@@ -93,6 +96,7 @@ const useStateToProps = (state) => {
 		countUsersPage: state.usersPage.countUsersPage,
 		currentPage: state.usersPage.currentPage,
 		isFetch: state.usersPage.isFetch,
+		isFollowProcess: state.usersPage.isFollowProcessing,
   };
 };
 
@@ -115,6 +119,9 @@ const useDispatchToProps = (dispatch) => {
 		},
 		toggleIsFecth: (isFetch) => {
 			dispatch(toggleIsFetchAC(isFetch))
+		},
+		toggleIsFollow: (isFollowProcess, userId) => {
+			dispatch(toggleIsFollowProcess(isFollowProcess, userId))
 		}
   };
 };

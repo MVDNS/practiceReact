@@ -39,20 +39,24 @@ function Users(props) {
       </div>
       <div className={s.btnsBlock}>
 				{u.followed ? 
-				(<button className={s.btn} onClick={() => {
+				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => {
+					props.toggleIsFollow(true, u.id)
 					getUnfollow(u.id)
 					.then( response => {
 						if(response.resultCode === 0){
 							props.unFollowUser(u.id)
 						}
+						props.toggleIsFollow(false, u.id)
 					} )
 				}}>Отписаться</button>) : 
-				(<button className={s.btn} onClick={() => {
+				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => {
+					props.toggleIsFollow(true, u.id)
 					getFollow(u.id)
 						.then( response => {
 							if(response.resultCode === 0){
 								props.followUser(u.id)
 								}
+							props.toggleIsFollow(false, u.id)
 				} )}}>Подписаться</button>)}
       </div>
     </div>
