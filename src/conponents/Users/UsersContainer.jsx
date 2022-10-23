@@ -1,33 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
-import { followAC, setCurrentPageAC, setTotalCountUsersAC, setUsersAC, unFollowAC, toggleIsFetchAC, toggleIsFollowProcess } from "../../state/usersReducer";
-import {UserApi} from '../../api/api'
+import { follow, unfollow, getUsers} from "../../state/usersReducer";
 
 class UsersAPIContainer extends React.Component {
 
 	componentDidMount() {
+
 		if(this.props.users.length === 0){
-			this.props.toggleIsFecth(true)
-			UserApi.getPage(this.props.currentPage, this.props.countUsersPage)
-			.then( response => {
-				console.log(response)
-				this.props.toggleIsFecth(false)
-				this.props.setUsers(response.items)
-				this.props.setTotalCountUsers(12)
-			} )
+			this.props.getUsers(this.props.currentPage, this.props.countUsersPage);
 		}
 	}
 
 	onChengedPage = (page) => {
-			this.props.setCurrentPage(page)
-			this.props.toggleIsFecth(true)
-			UserApi.getPage(page, this.props.countUsersPage)
-			.then( response => {
-				console.log(response)
-				this.props.toggleIsFecth(false)
-				this.props.setUsers(response.items)
-			} )
+			this.props.getUsers(page, this.props.countUsersPage);
 		}
 
 	render() {
@@ -38,8 +24,8 @@ class UsersAPIContainer extends React.Component {
 			currentPage={this.props.currentPage}
 			users={this.props.users}
 			isFetch={this.props.isFetch}
-			followUser={this.props.followUser}
-			unFollowUser={this.props.unFollowUser}
+			follow={this.props.follow}
+			unfollow={this.props.unfollow}
 			toggleIsFollow={this.props.toggleIsFollow}
 			isFollowProcess={this.props.isFollowProcess}
 			
@@ -100,32 +86,33 @@ const useStateToProps = (state) => {
   };
 };
 
-const useDispatchToProps = (dispatch) => {
-  return {
-    followUser: (userId) => {
-      dispatch(followAC(userId));
-    },
-    unFollowUser: (userId) => {
-      dispatch(unFollowAC(userId));
-    },
-		setUsers: (users) => {
-			dispatch(setUsersAC(users))
-		},
-		setTotalCountUsers: (totalCount) => {
-			dispatch(setTotalCountUsersAC(totalCount))
-		},
-		setCurrentPage: (currentPage) => {
-			dispatch(setCurrentPageAC(currentPage))
-		},
-		toggleIsFecth: (isFetch) => {
-			dispatch(toggleIsFetchAC(isFetch))
-		},
-		toggleIsFollow: (isFollowProcess, userId) => {
-			dispatch(toggleIsFollowProcess(isFollowProcess, userId))
-		}
-  };
-};
+// const useDispatchToProps = (dispatch) => {
+//   return {
+//     followUser: (userId) => {
+//       dispatch(followAC(userId));
+//     },
+//     unFollowUser: (userId) => {
+//       dispatch(unFollowAC(userId));
+//     },
+// 		setUsers: (users) => {
+// 			dispatch(setUsersAC(users))
+// 		},
+// 		setTotalCountUsers: (totalCount) => {
+// 			dispatch(setTotalCountUsersAC(totalCount))
+// 		},
+// 		setCurrentPage: (currentPage) => {
+// 			dispatch(setCurrentPageAC(currentPage))
+// 		},
+// 		toggleIsFecth: (isFetch) => {
+// 			dispatch(toggleIsFetchAC(isFetch))
+// 		},
+// 		toggleIsFollow: (isFollowProcess, userId) => {
+// 			dispatch(toggleIsFollowProcess(isFollowProcess, userId))
+// 		},
+		
+//   };
+// };
 
-const UsersContainer = connect(useStateToProps, useDispatchToProps)(UsersAPIContainer);
+const UsersContainer = connect(useStateToProps, {follow, unfollow, getUsers})(UsersAPIContainer);
 
 export default UsersContainer;

@@ -1,3 +1,4 @@
+import { UserApi } from '../api/api'
 
 const SEND_NEW_POST = 'SEND-NEW-POST';
 const STATE_NEW_POST = 'STATE-NEW-POST';
@@ -61,6 +62,15 @@ export const updateStateNewPost = (text) => {
 export const addSendNewPost = () => {
 	return {
 		type: SEND_NEW_POST,
+	}
+}
+
+export const getProfileUser = (userId) => {
+	return (dispatch) => {
+		UserApi.getUserProfile(userId)
+			.then(response => {
+				dispatch(setProfileUser(response))
+			})
 	}
 }
 

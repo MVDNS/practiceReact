@@ -1,3 +1,4 @@
+import { UserApi } from "../api/api";
 const SET_AUTH_USER_DATE = 'SET_AUTH_USER_DATE';
 
 const inintialState = {
@@ -29,6 +30,18 @@ export const setAuthUserDate = (email, userId, login) => {
 			userId,
 			login,
 		}
+	}
+}
+
+export const getAuth = () => {
+	return (dispatch) => {
+		UserApi.authAxios()
+			.then(response => {
+				if (response.resultCode === 0) {
+					let { email, id, login } = response.data
+					dispatch(setAuthUserDate(email, id, login))
+				}
+			})
 	}
 }
 

@@ -3,9 +3,11 @@ import s from "./Users.module.css";
 import { NavLink } from "react-router-dom";
 import userPhoto from '../../assets/usersAvatar/user_avatar.png'
 import Preloader from '../../preloader/Preloader'
-import {UserApi} from '../../api/api'
 
 function Users(props) {
+
+	console.log(props)
+
 	let pageCount = Math.ceil( props.totalCountUsers / props.countUsersPage);
 
 	let pages  = [];
@@ -39,25 +41,8 @@ function Users(props) {
       </div>
       <div className={s.btnsBlock}>
 				{u.followed ? 
-				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => {
-					props.toggleIsFollow(true, u.id)
-					UserApi.getUnfollow(u.id)
-					.then( response => {
-						if(response.resultCode === 0){
-							props.unFollowUser(u.id)
-						}
-						props.toggleIsFollow(false, u.id)
-					} )
-				}}>Отписаться</button>) : 
-				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => {
-					props.toggleIsFollow(true, u.id)
-					UserApi.getFollow(u.id)
-						.then( response => {
-							if(response.resultCode === 0){
-								props.followUser(u.id)
-								}
-							props.toggleIsFollow(false, u.id)
-				} )}}>Подписаться</button>)}
+				(<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => { props.unfollow(u.id) }}>Отписаться</button>) 
+				: (<button className={s.btn} disabled={props.isFollowProcess.some(id => id === u.id)} onClick={() => { props.follow(u.id) }}>Подписаться</button>)}
       </div>
     </div>
   ));
