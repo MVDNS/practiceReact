@@ -2,6 +2,7 @@ import './App.css';
 import './reset.css'
 import HeaderContainer from './conponents/Header/HeaderContainer';
 import Navbar from './conponents/Navbar/Navbar';
+import Login from './conponents/Login/Login';
 import ProfileContainer from './conponents/Profile/ProfileContainer';
 import DialogsContainer from './conponents/Dialogs/DialogsContainer';
 import UsersContainer from './conponents/Users/UsersContainer';
@@ -18,6 +19,7 @@ function App(props) {
 			<Navbar />
 			<div className='app-content'>
 				<Routes>
+					<Route path="/login" element={<Login />} />
 					<Route path="/profile" element={<ProfileContainer />} />
 					<Route path="/profile/:userId" element={<ProfileContainer />} />
 					<Route path="/dialogs/*" element={<DialogsContainer />} />
