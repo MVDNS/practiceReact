@@ -4,6 +4,7 @@ import {
   addSendNewMessage,
   updateStateNewMessage,
 } from "./../../state/dialogsReducer";
+import { compose } from "redux";
 
 const useStateToProps = (state) => {
   return {
@@ -25,6 +26,8 @@ const useDispatchToProps = (dispatch) => {
   };
 };
 
-const DialogsContainer = connect(useStateToProps, useDispatchToProps)(Dialogs);
+const DialogsContainer = compose(
+	connect(useStateToProps, useDispatchToProps)
+)(Dialogs)
 
 export default DialogsContainer;

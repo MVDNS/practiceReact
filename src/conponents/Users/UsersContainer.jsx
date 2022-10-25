@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import { follow, unfollow, getUsers} from "../../state/usersReducer";
+import { compose } from "redux";
 
 class UsersAPIContainer extends React.Component {
 
@@ -113,6 +114,8 @@ const useStateToProps = (state) => {
 //   };
 // };
 
-const UsersContainer = connect(useStateToProps, {follow, unfollow, getUsers})(UsersAPIContainer);
+const UsersContainer = compose(
+	connect(useStateToProps, {follow, unfollow, getUsers})
+)(UsersAPIContainer)
 
 export default UsersContainer;
