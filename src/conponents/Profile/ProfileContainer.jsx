@@ -3,6 +3,8 @@ import Profile from "./Profile";
 import { getProfileUser } from '../../state/profileReducer'
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import {withAuthRedirect} from '../../hoc/withAuthRedirect'
+import { compose } from "redux";
 
 export function withRouter(Children){
 	return(props)=>{
@@ -12,7 +14,6 @@ export function withRouter(Children){
 }
 
 class ProfileAPI extends React.Component {
-
 	componentDidMount (){
 		let userId = this.props.match.params.userId;
 		if(!userId){
@@ -20,7 +21,6 @@ class ProfileAPI extends React.Component {
 		}
 			this.props.getProfileUser(userId)
 	}
-
 	render (){
 		return (
 			<Profile {...this.props}/>
@@ -28,15 +28,23 @@ class ProfileAPI extends React.Component {
 	}
 };
 
-const profileAp = withRouter(ProfileAPI)
-
 const useStateToProps = (state) => {
 	return {
 		profile: state.profilePage.profile,
-		isAuth: state.auth.isAuth
 	}
 } 
 
-const ProfileContainer = connect(useStateToProps, {getProfileUser})(profileAp);
+let ProfileContainer = compose(
+	connect(useStateToProps, {getProfileUser}),
+	withAuthRedirect,
+	withRouter
+)(ProfileAPI)
 
 export default ProfileContainer;
+
+// или по дефолту без создания переменной
+// export default compose(
+// 	connect(useStateToProps, {getProfileUser}),
+// 	withAuthRedirect,
+// 	withRouter
+// )(ProfileAPI)
