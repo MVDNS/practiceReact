@@ -36,7 +36,7 @@ const useStateToProps = (state) => {
 
 let ProfileContainer = compose(
 	connect(useStateToProps, {getProfileUser}),
-	withAuthRedirect,
+	//withAuthRedirect,
 	withRouter
 )(ProfileAPI)
 

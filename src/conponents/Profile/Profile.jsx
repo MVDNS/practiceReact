@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 function Profile(props) {
 
-	if(!props.isAuth) return <Navigate to='/login' />
+	//if(!props.isAuth) return <Navigate to='/login' />
 	
   return (
     <div className={s.profile}>

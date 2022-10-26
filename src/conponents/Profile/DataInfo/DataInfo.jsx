@@ -1,5 +1,6 @@
 import Preloader from '../../../preloader/Preloader';
 import s from './DataInfo.module.css';
+import StatusProfile from './StatusProfile/StatusProfile';
 
 function DataInfo(props) {
 	if(!props.profile){
@@ -14,6 +15,7 @@ function DataInfo(props) {
 			<div className={s.name}>{props.profile.fullName}</div>
 			<div className={s.aboutMe}>О себе: {props.profile.aboutMe}</div>
 			<div className={s.contacts}>Контакты: {props.profile.contacts.vk}</div>
+			<StatusProfile status={'hello its fake status'} />
 		</div>					
 	</div>
 	)
