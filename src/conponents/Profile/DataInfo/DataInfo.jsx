@@ -1,6 +1,8 @@
-import Preloader from '../../../preloader/Preloader';
+
 import s from './DataInfo.module.css';
 import StatusProfile from './StatusProfile/StatusProfile';
+import avatar from '../../../assets/usersAvatar/user_avatar.png'
+import Preloader from '../../../preloader/Preloader'
 
 function DataInfo(props) {
 	if(!props.profile){
@@ -9,13 +11,13 @@ function DataInfo(props) {
 	return (
 		<div className={s.data}>
 		<div className={s.avatar}>
-			<img  className={s.img}  src={props.profile.photos.large} alt=""/>
+			<img  className={s.img}  src={!props.profile.data.photos.large ? avatar : props.profile.data.photos.large} alt=""/>
 		</div>
 		<div className={s.info}>
-			<div className={s.name}>{props.profile.fullName}</div>
-			<div className={s.aboutMe}>О себе: {props.profile.aboutMe}</div>
-			<div className={s.contacts}>Контакты: {props.profile.contacts.vk}</div>
-			<StatusProfile status={'hello its fake status'} />
+			<div className={s.name}>{props.profile.data.fullName}</div>
+			<div className={s.aboutMe}>О себе: {props.profile.data.aboutMe}</div>
+			<div className={s.contacts}>Контакты: {props.profile.data.contacts.vk}</div>
+			<StatusProfile userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
 		</div>					
 	</div>
 	)

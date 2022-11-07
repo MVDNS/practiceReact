@@ -1,10 +1,9 @@
 import React from "react";
 
 class StatusProfile extends React.Component {
-
 	state = {
 		isStatusEdit: false,
-		text: this.props.status
+		userStatus: this.props.userStatus
 	}
 
 	activateEditStatus(){
@@ -18,24 +17,21 @@ class StatusProfile extends React.Component {
 		this.setState({
 			isStatusEdit: false
 		})
-		console.log(this.state.text)
+		this.props.updateUserStatus(this.state.userStatus);
 	}
 
-	changeText(event) {
+	onStatusChange = (e) => {
 		this.setState({
-			text: event.target.value
+			userStatus: e.currentTarget.value
 		})
-		
 	}
-
-
 
 	render() {
 		return (
 			<>
 				{this.state.isStatusEdit 
-				? <input autoFocus={true} onChange={(event => {this.changeText(event)})} onBlur={this.deactivateEditStatus.bind(this)} value={this.state.text}/> 
-				: <span onClick={(this.activateEditStatus.bind(this))} >{this.state.text}</span>
+				? <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditStatus.bind(this)} value={this.state.userStatus}/> 
+				: <span onClick={(this.activateEditStatus.bind(this))} >{this.props.userStatus || 'Нет статуса'}</span>
 			}	
 			</>
 		)

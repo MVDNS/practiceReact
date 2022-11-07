@@ -15,14 +15,6 @@ export const UserApi = {
 				return response.data
 			})
 	},
-
-	getUserProfile(userId) {
-		return instanse.get(`profile/${userId}`)
-			.then(response => {
-				return response.data
-			})
-	},
-
 	getUnfollow(id) {
 		return instanse.delete(`follow/${id}`)
 			.then(response => {
@@ -42,6 +34,18 @@ export const UserApi = {
 			.then(response => {
 				return response.data
 			})
+	}
+}
+
+export const profileAPI = {
+	getUserProfile(userId) {
+		return instanse.get(`profile/${userId}`)
+	},
+	getUserStatus(userId) {
+		return instanse.get(`/profile/status/${userId}`)
+	},
+	updateUserStatus(status) {
+		return instanse.put(`/profile/status`, { status })
 	}
 }
 

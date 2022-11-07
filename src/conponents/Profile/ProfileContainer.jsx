@@ -1,9 +1,10 @@
 import React from "react";
 import Profile from "./Profile";
-import { getProfileUser } from '../../state/profileReducer'
+import { getProfileUser, getUserStatus, updateUserStatus } from '../../state/profileReducer'
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
+
 import { compose } from "redux";
 
 export function withRouter(Children){
@@ -20,10 +21,11 @@ class ProfileAPI extends React.Component {
 			userId = '26228'
 		}
 			this.props.getProfileUser(userId)
+			this.props.getUserStatus(userId)
 	}
 	render (){
 		return (
-			<Profile {...this.props}/>
+			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus}/>
 		)
 	}
 };
@@ -31,11 +33,12 @@ class ProfileAPI extends React.Component {
 const useStateToProps = (state) => {
 	return {
 		profile: state.profilePage.profile,
+		userStatus: state.profilePage.userStatus
 	}
 } 
 
 let ProfileContainer = compose(
-	connect(useStateToProps, {getProfileUser}),
+	connect(useStateToProps, {getProfileUser, getUserStatus, updateUserStatus}),
 	//withAuthRedirect,
 	withRouter
 )(ProfileAPI)
