@@ -45,5 +45,13 @@ export const getAuth = () => {
 	}
 }
 
+export const getLoginUser = (userData) => {
+	return (dispatch) => {
+		UserApi.getLogin()
+	}
+}
+
+
+
 
 export default authReducer

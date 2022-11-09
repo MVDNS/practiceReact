@@ -15,6 +15,11 @@ export const UserApi = {
 				return response.data
 			})
 	},
+
+	getLogin() {
+		return instanse.post(`auth/login?params=1`)
+	},
+
 	getUnfollow(id) {
 		return instanse.delete(`follow/${id}`)
 			.then(response => {
