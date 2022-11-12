@@ -1,41 +1,52 @@
 import React from "react";
 import s from "./MyPost.module.css";
 import Post from "./Post/Post";
+import { Formik, Form, Field} from 'formik';
+
+const PostCreator = (props) => {
+	return (
+					<Formik
+						initialValues={{
+							textarea: '',
+							}}
+						onSubmit={(values, { setSubmitting }) => {
+							setTimeout(() => {
+								props.postNewText(values.textarea)
+								setSubmitting(false);
+							}, 1000);
+						}}
+						>
+						{({ isSubmitting }) => (
+						<Form>
+							<Field
+								className={s.textarea}
+								placeholder="Ваше сообщение..."
+								name="textarea"
+								component="textarea"
+								rows="4"
+								maxLength='300'
+							/>
+							<button className={s.submit} type='submit' disabled={isSubmitting}>
+								<span className={s.btnText}>Отправить</span>
+							</button>
+						</Form>
+
+						)}
+					</Formik>
+	)
+}
 
 function MyPost(props) {
   let postsElement = props.posts.map((p) => (
     <Post message={p.message} like={p.likesCount} key={p.id} />
   ));
-
-  let newPost = React.createRef();
-
-  let onAddPost = () => {
-    props.addSendNewPost();
-  };
-
-  let onUpdateText = () => {
-    let text = newPost.current.value;
-    props.updateStateNewPost(text);
-  };
-
   return (
     <div className="">
       <div className={s.create}>
         <div className={s.title}>Новое сообщение</div>
-        <textarea
-          className={s.textarea}
-          ref={newPost}
-          onChange={onUpdateText}
-          value={props.newPostText}
-          placeholder="Ваше сообщение..."
-          name="textarea"
-          maxLength="400"
-          cols="3"
-          rows="4"
-        ></textarea>
-        <button className={s.submit} onClick={onAddPost}>
-          <span className={s.btnText}>Отправить</span>
-        </button>
+				<div className={s.formwrap}>
+					<PostCreator postNewText={props.addSendNewPost}/>
+				</div>
       </div>
       {postsElement}
     </div>

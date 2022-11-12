@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import Dialogs from "./Dialogs";
 import {
   addSendNewMessage,
-  updateStateNewMessage,
 } from "./../../state/dialogsReducer";
 import { compose } from "redux";
 
@@ -17,11 +16,8 @@ const useStateToProps = (state) => {
 
 const useDispatchToProps = (dispatch) => {
   return {
-    addSendNewMessage: () => {
-      dispatch(addSendNewMessage());
-    },
-    updateStateNewMessage: (text) => {
-      dispatch(updateStateNewMessage(text));
+    addSendNewMessage: (messageText) => {
+      dispatch(addSendNewMessage(messageText));
     },
   };
 };

@@ -45,9 +45,30 @@ export const getAuth = () => {
 	}
 }
 
+// export const getLoginUser = (userData) => {
+// 	UserApi.getLogin(userData)
+// 		.then(response => {
+// 			if (response.resultCode === 0) {
+// 				alert(`Вы авторизованны! Ваш id: ${response.data.userId}`)
+// 			}
+// 		})
+// }
+
 export const getLoginUser = (userData) => {
 	return (dispatch) => {
-		UserApi.getLogin()
+		UserApi.getLogin(userData)
+			.then(response => {
+				if (response.resultCode === 0) {
+					UserApi.authAxios()
+						.then(response => {
+							if (response.resultCode === 0) {
+								let { email, id, login } = response.data
+								dispatch(setAuthUserDate(email, id, login))
+							}
+						})
+					alert(`Вы авторизованы!`)
+				}
+			})
 	}
 }
 

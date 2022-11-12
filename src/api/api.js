@@ -16,9 +16,13 @@ export const UserApi = {
 			})
 	},
 
-	getLogin() {
-		return instanse.post(`auth/login?params=1`)
+	getLogin(userData) {
+		return instanse.post(`auth/login?`, { ...userData })
+			.then(response => {
+				return response.data
+			})
 	},
+
 
 	getUnfollow(id) {
 		return instanse.delete(`follow/${id}`)
