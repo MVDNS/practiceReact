@@ -11,10 +11,11 @@ const SendPost = (props) => {
 						initialValues={{
 							textarea: '',
 							}}
-						onSubmit={(values, { setSubmitting }) => {
+						onSubmit={(values, { setSubmitting, resetForm}) => {
 							setTimeout(() => {
 								props.SendNewMessage(values.textarea)
 								setSubmitting(false);
+								resetForm();
 							}, 1000);
 						}}
 						>

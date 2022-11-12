@@ -1,5 +1,6 @@
 import { UserApi } from "../api/api";
 const SET_AUTH_USER_DATE = 'SET_AUTH_USER_DATE';
+const RESET_AUTH_USER_DATA = 'RESET_AUTH_USER_DATA';
 
 const inintialState = {
 	userId: null,
@@ -17,6 +18,14 @@ const authReducer = (state = inintialState, action) => {
 				...action.data,
 				isAuth: true
 			}
+		case RESET_AUTH_USER_DATA:
+			return {
+				...state,
+				userId: null,
+				email: null,
+				login: null,
+				isAuth: false
+			}
 		default:
 			return state;
 	}
@@ -30,6 +39,12 @@ export const setAuthUserDate = (email, userId, login) => {
 			userId,
 			login,
 		}
+	}
+}
+
+export const resetAuthUserData = () => {
+	return {
+		type: RESET_AUTH_USER_DATA,
 	}
 }
 
@@ -69,6 +84,18 @@ export const getLoginUser = (userData) => {
 					alert(`Вы авторизованы!`)
 				}
 			})
+	}
+}
+
+export const getLogOut = () => {
+	return (dispatch) => {
+		UserApi.getLogOut()
+			.then(response => {
+				if (response.resultCode === 0) {
+					dispatch(resetAuthUserData())
+				}
+			})
+		alert(`Вы не авторизованы!`)
 	}
 }
 

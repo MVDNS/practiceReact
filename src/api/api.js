@@ -23,6 +23,13 @@ export const UserApi = {
 			})
 	},
 
+	getLogOut() {
+		return instanse.delete(`auth/login`)
+			.then(response => {
+				return response.data
+			})
+	},
+
 
 	getUnfollow(id) {
 		return instanse.delete(`follow/${id}`)

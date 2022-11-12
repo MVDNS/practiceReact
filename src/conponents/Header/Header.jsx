@@ -11,8 +11,7 @@ function Header(props) {
 						<h1 className={s.text}>Profile</h1>
 					</div>
 					<div className={s.blockLogin}>
-						{props.isAuth ? props.login : <NavLink to='/login'>Login</NavLink>}
-						
+						{props.isAuth ? <div>{props.login} <button onClick={props.getLogOut}>Выход</button> </div> : <NavLink to='/login'>Login</NavLink>}
 					</div>
 				</header>
 	)

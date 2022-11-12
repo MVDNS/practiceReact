@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 const LoginForm = (props) => {
 
-	const submit = (values, { setSubmitting }) => {
+	const submit = (values, { setSubmitting, resetForm }) => {
 		setTimeout(() => {
+			
 			props.loginUser(values)
 			setSubmitting(false);
+			resetForm();
 		}, 0);
 	}
 	return (

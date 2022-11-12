@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 import s from "./Navbar.module.css";
 //import FavoritFriends from "./FavoritFriends/FavoritFriends";
-import { getProfileUser } from "../../state/profileReducer";
-import auth from '../../state/redux-store'
 
 const activeLink = ({ isActive }) =>
   isActive ? `${s.link} ${s.active}` : `${s.link}`;

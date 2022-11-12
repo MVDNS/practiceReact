@@ -9,10 +9,11 @@ const PostCreator = (props) => {
 						initialValues={{
 							textarea: '',
 							}}
-						onSubmit={(values, { setSubmitting }) => {
+						onSubmit={(values, { setSubmitting, resetForm }) => {
 							setTimeout(() => {
 								props.postNewText(values.textarea)
 								setSubmitting(false);
+								resetForm();
 							}, 1000);
 						}}
 						>
