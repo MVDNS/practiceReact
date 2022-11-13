@@ -1,6 +1,5 @@
 import { UserApi } from "../api/api";
 const SET_AUTH_USER_DATE = 'SET_AUTH_USER_DATE';
-const RESET_AUTH_USER_DATA = 'RESET_AUTH_USER_DATA';
 
 const inintialState = {
 	userId: null,
@@ -16,37 +15,24 @@ const authReducer = (state = inintialState, action) => {
 			return {
 				...state,
 				...action.data,
-				isAuth: true
-			}
-		case RESET_AUTH_USER_DATA:
-			return {
-				...state,
-				userId: null,
-				email: null,
-				login: null,
-				isAuth: false
 			}
 		default:
 			return state;
 	}
 }
 
-export const setAuthUserDate = (email, userId, login) => {
+export const setAuthUserDate = (email, userId, login, isAuth = false) => {
 	return {
 		type: SET_AUTH_USER_DATE,
 		data: {
 			email,
 			userId,
 			login,
+			isAuth,
 		}
 	}
 }
 
-export const resetAuthUserData = () => {
-	return {
-		type: RESET_AUTH_USER_DATA,
-	}
-}
 
 export const getAuth = () => {
 	return (dispatch) => {
@@ -54,7 +40,7 @@ export const getAuth = () => {
 			.then(response => {
 				if (response.resultCode === 0) {
 					let { email, id, login } = response.data
-					dispatch(setAuthUserDate(email, id, login))
+					dispatch(setAuthUserDate(email, id, login, true))
 				}
 			})
 	}
@@ -69,18 +55,13 @@ export const getAuth = () => {
 // 		})
 // }
 
-export const getLoginUser = (userData) => {
+export const getLoginUser = (email, password, rememberMe) => {
+	console.log(email, password, rememberMe)
 	return (dispatch) => {
-		UserApi.getLogin(userData)
+		UserApi.getLogin(email, password, rememberMe)
 			.then(response => {
 				if (response.resultCode === 0) {
-					UserApi.authAxios()
-						.then(response => {
-							if (response.resultCode === 0) {
-								let { email, id, login } = response.data
-								dispatch(setAuthUserDate(email, id, login))
-							}
-						})
+					dispatch(getAuth())
 					alert(`Вы авторизованы!`)
 				}
 			})
@@ -92,10 +73,9 @@ export const getLogOut = () => {
 		UserApi.getLogOut()
 			.then(response => {
 				if (response.resultCode === 0) {
-					dispatch(resetAuthUserData())
+					dispatch(setAuthUserDate(null, null, null, false))
 				}
 			})
-		alert(`Вы не авторизованы!`)
 	}
 }
 

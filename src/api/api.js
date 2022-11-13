@@ -16,8 +16,8 @@ export const UserApi = {
 			})
 	},
 
-	getLogin(userData) {
-		return instanse.post(`auth/login?`, { ...userData })
+	getLogin(email, password, rememberMe) {
+		return instanse.post(`auth/login?`, { email, password, rememberMe })
 			.then(response => {
 				return response.data
 			})

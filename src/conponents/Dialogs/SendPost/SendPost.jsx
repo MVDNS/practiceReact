@@ -11,6 +11,15 @@ const SendPost = (props) => {
 						initialValues={{
 							textarea: '',
 							}}
+							validate={values => {
+								const errors = {};
+									if (!values.textarea) {
+										errors.textarea = 'Поле не должно быть пустым!';
+									} else if (values.textarea.length > 50) {
+										errors.textarea = 'Максимальное число символоов 50!';
+									}
+								return errors;
+							}}
 						onSubmit={(values, { setSubmitting, resetForm}) => {
 							setTimeout(() => {
 								props.SendNewMessage(values.textarea)
@@ -19,7 +28,10 @@ const SendPost = (props) => {
 							}, 1000);
 						}}
 						>
-						{({ isSubmitting }) => (
+						{({ values,
+         			errors,
+         			touched,
+				  		isSubmitting }) => (
 						<Form>
 							<Field 
 								className={s.textarea}
@@ -28,12 +40,13 @@ const SendPost = (props) => {
 								component="textarea"
 								rows="1"
 								maxLength='100'
+								validate={values.textarea}
 							/>
+							{errors.textarea && touched.textarea && errors.textarea}
 							<button className={s.submit} type='submit' disabled={isSubmitting}>
 								<span className={s.btnText}>Отправить</span>
 							</button>
 						</Form>
-
 						)}
 					</Formik>
       </div>

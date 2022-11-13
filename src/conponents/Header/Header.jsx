@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import s from './Header.module.css';
 
 
@@ -11,7 +11,9 @@ function Header(props) {
 						<h1 className={s.text}>Profile</h1>
 					</div>
 					<div className={s.blockLogin}>
-						{props.isAuth ? <div>{props.login} <button onClick={props.getLogOut}>Выход</button> </div> : <NavLink to='/login'>Login</NavLink>}
+						{props.isAuth 
+						? <div>{props.login} <button onClick={props.getLogOut}>Выход</button></div> 
+						: <NavLink to='/login'>Login</NavLink>}
 					</div>
 				</header>
 	)
