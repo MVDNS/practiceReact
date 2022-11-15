@@ -5,9 +5,6 @@ import userPhoto from '../../assets/usersAvatar/user_avatar.png'
 import Preloader from '../../preloader/Preloader'
 
 function Users(props) {
-
-	console.log(props)
-
 	let pageCount = Math.ceil( props.totalCountUsers / props.countUsersPage);
 
 	let pages  = [];

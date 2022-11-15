@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom";
 import s from './Login.module.css'
 
-const LoginForm = (props) => {
 
-	const submit = (values, { setSubmitting, resetForm }) => {
+const LoginForm = (props) => {
+	const submit = (values, { setSubmitting, resetForm, setErrors }) => {
 		setTimeout(() => {
-			props.loginUser(values.email, values.password, values.rememberMe)
+			props.loginUser(values.email, values.password, values.rememberMe, setErrors)
 			setSubmitting(false);
 			resetForm();
 		}, 0);
@@ -38,7 +38,8 @@ const LoginForm = (props) => {
 				}}
 				onSubmit={submit}
      >
-       {({ values,
+       {({
+				values,
          errors,
          touched,
 				 isSubmitting }) => (
@@ -58,6 +59,7 @@ const LoginForm = (props) => {
 					<button type='submit' disabled={isSubmitting}>
              Отправить
            </button>
+					 <div className={errors.apiError ? s.error : '' }>{errors.apiError}</div>
 					</div>
          </Form>
        )}

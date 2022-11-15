@@ -1,11 +1,12 @@
 import { NavLink, Navigate } from 'react-router-dom';
 import s from './Header.module.css';
+import logo from '../../assets/logo/samurai.png'
 
 
 function Header(props) {
 	return (
 				<header className={s.header}>
-					<img className={s.img} src='https://i.ibb.co/zVjHMcx/Pngtree-blue-samurai-head-esports-logo-4278445.png' alt='img'/>
+					<NavLink to='/login'><img className={s.img} src={logo} alt='img'/></NavLink>
 					<div className={s.companyName}>MVDNSS</div>
 					<div className={s.title}>
 						<h1 className={s.text}>Profile</h1>

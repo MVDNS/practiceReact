@@ -18,9 +18,6 @@ export const UserApi = {
 
 	getLogin(email, password, rememberMe) {
 		return instanse.post(`auth/login?`, { email, password, rememberMe })
-			.then(response => {
-				return response.data
-			})
 	},
 
 	getLogOut() {

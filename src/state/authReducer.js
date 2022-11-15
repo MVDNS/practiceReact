@@ -55,14 +55,15 @@ export const getAuth = () => {
 // 		})
 // }
 
-export const getLoginUser = (email, password, rememberMe) => {
-	console.log(email, password, rememberMe)
+export const getLoginUser = (email, password, rememberMe, setErrors) => {
 	return (dispatch) => {
 		UserApi.getLogin(email, password, rememberMe)
 			.then(response => {
-				if (response.resultCode === 0) {
+				if (response.data.resultCode === 0) {
 					dispatch(getAuth())
-					alert(`Вы авторизованы!`)
+				}
+				else {
+					setErrors({ apiError: `${response.data.messages[0]}` })
 				}
 			})
 	}

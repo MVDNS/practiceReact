@@ -17,8 +17,8 @@ export function withRouter(Children){
 class ProfileAPI extends React.Component {
 	componentDidMount (){
 		let userId = this.props.match.params.userId;
-		if(!userId){
-			userId = '26228'
+		if(!userId && this.props.isAuth){
+			userId = this.props.autorizedUserId
 		}
 			this.props.getProfileUser(userId)
 			this.props.getUserStatus(userId)
@@ -33,13 +33,15 @@ class ProfileAPI extends React.Component {
 const useStateToProps = (state) => {
 	return {
 		profile: state.profilePage.profile,
-		userStatus: state.profilePage.userStatus
+		userStatus: state.profilePage.userStatus,
+		isAuth: state.auth.isAuth,
+		autorizedUserId: state.auth.userId
 	}
 } 
 
 let ProfileContainer = compose(
 	connect(useStateToProps, {getProfileUser, getUserStatus, updateUserStatus}),
-	//withAuthRedirect,
+	withAuthRedirect,
 	withRouter
 )(ProfileAPI)
 
