@@ -1,19 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header'
-import { getAuth, getLogOut} from '../../state/authReducer'
+import { getLogOut} from '../../state/authReducer'
 import { compose } from 'redux';
  
 class HeaderContainer extends React.Component {
-
-	componentDidMount () {
-		this.props.getAuth()
-	}
-
 	render () {
 		return  <Header {...this.props} />
 	}
-
 }
 
 const useStateToProps = (state) => {
@@ -25,6 +19,6 @@ const useStateToProps = (state) => {
 }
 
 export default compose(
-	connect(useStateToProps, {getAuth, getLogOut})
+	connect(useStateToProps, {getLogOut})
 	)
 	(HeaderContainer)

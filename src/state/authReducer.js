@@ -36,7 +36,7 @@ export const setAuthUserDate = (email, userId, login, isAuth = false) => {
 
 export const getAuth = () => {
 	return (dispatch) => {
-		UserApi.authAxios()
+		return UserApi.authAxios()
 			.then(response => {
 				if (response.resultCode === 0) {
 					let { email, id, login } = response.data

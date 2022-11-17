@@ -4,6 +4,7 @@ import {
   addSendNewMessage,
 } from "./../../state/dialogsReducer";
 import { compose } from "redux";
+import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 
 const useStateToProps = (state) => {
   return {
@@ -23,6 +24,7 @@ const useDispatchToProps = (dispatch) => {
 };
 
 const DialogsContainer = compose(
+	withAuthRedirect,
 	connect(useStateToProps, useDispatchToProps)
 )(Dialogs)
 
