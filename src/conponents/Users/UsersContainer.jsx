@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Users from "./Users";
 import { follow, unfollow, getUsers} from "../../state/usersReducer";
 import { compose } from "redux";
+import { getCountUsersPage, getCurrentPage, getIsFetch, getIsFollowProcessing, getTotalCountUsers, getUsersSelector } from "../../state/user-selectors";
 
 class UsersAPIContainer extends React.Component {
 
@@ -78,12 +79,12 @@ class UsersAPIContainer extends React.Component {
 
 const useStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-		totalCountUsers: state.usersPage.totalCountUsers,
-		countUsersPage: state.usersPage.countUsersPage,
-		currentPage: state.usersPage.currentPage,
-		isFetch: state.usersPage.isFetch,
-		isFollowProcess: state.usersPage.isFollowProcessing,
+    users: getUsersSelector(state),
+		totalCountUsers: getTotalCountUsers(state),
+		countUsersPage: getCountUsersPage(state),
+		currentPage: getCurrentPage(state),
+		isFetch: getIsFetch(state),
+		isFollowProcess: getIsFollowProcessing(state),
   };
 };
 
