@@ -1,8 +1,8 @@
 
 import s from './DataInfo.module.css';
-import StatusProfile from './StatusProfile/StatusProfile';
 import avatar from '../../../assets/usersAvatar/user_avatar.png'
 import Preloader from '../../../preloader/Preloader'
+import StatusProfileWithHooks from './StatusProfile/StatusProfileWithHooks';
 
 function DataInfo(props) {
 	if(!props.profile){
@@ -17,7 +17,7 @@ function DataInfo(props) {
 			<div className={s.name}>{props.profile.data.fullName}</div>
 			<div className={s.aboutMe}>О себе: {props.profile.data.aboutMe}</div>
 			<div className={s.contacts}>Контакты: {props.profile.data.contacts.vk}</div>
-			<StatusProfile userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
+			<StatusProfileWithHooks userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
 		</div>					
 	</div>
 	)
