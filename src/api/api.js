@@ -27,7 +27,6 @@ export const UserApi = {
 			})
 	},
 
-
 	getUnfollow(id) {
 		return instanse.delete(`follow/${id}`)
 			.then(response => {

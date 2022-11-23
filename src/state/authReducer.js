@@ -34,15 +34,11 @@ export const setAuthUserDate = (email, userId, login, isAuth = false) => {
 }
 
 
-export const getAuth = () => {
-	return (dispatch) => {
-		return UserApi.authAxios()
-			.then(response => {
-				if (response.resultCode === 0) {
-					let { email, id, login } = response.data
-					dispatch(setAuthUserDate(email, id, login, true))
-				}
-			})
+export const getAuth = () => async (dispatch) => {
+	let promise = await UserApi.authAxios()
+	if (promise.resultCode === 0) {
+		let { email, id, login } = promise.data
+		dispatch(setAuthUserDate(email, id, login, true))
 	}
 }
 
@@ -55,28 +51,20 @@ export const getAuth = () => {
 // 		})
 // }
 
-export const getLoginUser = (email, password, rememberMe, setErrors) => {
-	return (dispatch) => {
-		UserApi.getLogin(email, password, rememberMe)
-			.then(response => {
-				if (response.data.resultCode === 0) {
-					dispatch(getAuth())
-				}
-				else {
-					setErrors({ apiError: `${response.data.messages[0]}` })
-				}
-			})
+export const getLoginUser = (email, password, rememberMe, setErrors) => async (dispatch) => {
+	let promise = await UserApi.getLogin(email, password, rememberMe)
+	if (promise.data.resultCode === 0) {
+		dispatch(getAuth())
+	}
+	else {
+		setErrors({ apiError: `${promise.data.messages[0]}` })
 	}
 }
 
-export const getLogOut = () => {
-	return (dispatch) => {
-		UserApi.getLogOut()
-			.then(response => {
-				if (response.resultCode === 0) {
-					dispatch(setAuthUserDate(null, null, null, false))
-				}
-			})
+export const getLogOut = () => async (dispatch) => {
+	let promise = await UserApi.getLogOut()
+	if (promise.resultCode === 0) {
+		dispatch(setAuthUserDate(null, null, null, false))
 	}
 }
 

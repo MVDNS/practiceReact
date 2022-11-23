@@ -131,43 +131,34 @@ export const toggleIsFollow = (isFollowProcess, userId) => {
 	}
 }
 
-export const getUsers = (currentPage, countUsersPage) => {
-	return (dispatch) => {
-		dispatch(setCurrentPage(currentPage))
-		dispatch(toggleIsFetch(true))
-		UserApi.getPage(currentPage, countUsersPage)
-			.then(response => {
-				dispatch(toggleIsFetch(false))
-				dispatch(setUsers(response.items))
-				dispatch(setTotalCountUsers(12))
-			})
-	}
+export const getUsers = (currentPage, countUsersPage) => async (dispatch) => {
+	dispatch(setCurrentPage(currentPage))
+	dispatch(toggleIsFetch(true))
+	let promise = await UserApi.getPage(currentPage, countUsersPage)
+	dispatch(toggleIsFetch(false))
+	dispatch(setUsers(promise.items))
+	dispatch(setTotalCountUsers(12))
 }
 
-export const follow = (userId) => {
-	return (dispatch) => {
-		dispatch(toggleIsFollow(true, userId))
-		UserApi.getFollow(userId)
-			.then(response => {
-				if (response.resultCode === 0) {
-					dispatch(followSuccess(userId))
-				}
-				dispatch(toggleIsFollow(false, userId))
-			})
+const followUnfollow = async (dispatch, method, userId, success) => {
+	dispatch(toggleIsFollow(true, userId))
+	let promise = await method(userId)
+	if (promise.resultCode === 0) {
+		dispatch(success(userId))
 	}
+	dispatch(toggleIsFollow(false, userId))
 }
 
-export const unfollow = (userId) => {
-	return (dispatch) => {
-		dispatch(toggleIsFollow(true, userId))
-		UserApi.getUnfollow(userId)
-			.then(response => {
-				if (response.resultCode === 0) {
-					dispatch(unfollowSuccess(userId))
-				}
-				dispatch(toggleIsFollow(false, userId))
-			})
-	}
+export const follow = (userId) => async (dispatch) => {
+	let method = UserApi.getFollow
+	let success = followSuccess
+	followUnfollow(dispatch, method, userId, success)
+}
+
+export const unfollow = (userId) => async (dispatch) => {
+	let method = UserApi.getUnfollow
+	let success = unfollowSuccess
+	followUnfollow(dispatch, method, userId, success)
 }
 
 

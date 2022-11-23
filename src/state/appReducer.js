@@ -24,17 +24,14 @@ const initializedSuccess = () => {
 	}
 }
 
-export const initializeApp = () => {
-	return (dispatch) => {
-		let dispatchRes = dispatch(getAuth());
-		//dispatch(anyFunc());
-		//dispatch(anyFunc());
-		dispatchRes
-			.then(() => {
-				dispatch(initializedSuccess());
-			})
-
-	}
+export const initializeApp = () => (dispatch) => {
+	let dispatchRes = dispatch(getAuth());
+	//dispatch(anyFunc());
+	//dispatch(anyFunc());
+	dispatchRes
+		.then(() => {
+			dispatch(initializedSuccess());
+		})
 }
 
 export default appReducer

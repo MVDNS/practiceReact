@@ -13,7 +13,6 @@ class UsersAPIContainer extends React.Component {
 			this.props.getUsers(this.props.currentPage, this.props.countUsersPage);
 		}
 	}
-
 	onChengedPage = (page) => {
 			this.props.getUsers(page, this.props.countUsersPage);
 		}
