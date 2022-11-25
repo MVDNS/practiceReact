@@ -1,6 +1,6 @@
 import React from "react";
 import Profile from "./Profile";
-import { getProfileUser, getUserStatus, updateUserStatus } from '../../state/profileReducer'
+import { getProfileUser, getUserStatus, updateUserStatus, loadPhoto } from '../../state/profileReducer'
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
@@ -17,7 +17,6 @@ export function withRouter(Children){
 class ProfileAPI extends React.Component {
 	componentDidMount (){
 		let userId = this.props.match.params.userId;
-		console.log(this.props)
 		if(!userId){
 			userId = this.props.autorizedUserId
 			if(!userId){
@@ -29,7 +28,7 @@ class ProfileAPI extends React.Component {
 	}
 	render (){
 		return (
-			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus}/>
+			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus} loadPhoto={this.props.loadPhoto}/>
 		)
 	}
 };
@@ -46,7 +45,7 @@ const useStateToProps = (state) => {
 let ProfileContainer = compose(
 	withRouter,
 	withAuthRedirect,
-	connect(useStateToProps, {getProfileUser, getUserStatus, updateUserStatus}),
+	connect(useStateToProps, {getProfileUser, getUserStatus, updateUserStatus, loadPhoto}),
 )(ProfileAPI)
 
 export default ProfileContainer;

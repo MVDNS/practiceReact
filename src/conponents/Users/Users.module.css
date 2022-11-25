@@ -76,3 +76,13 @@
 .activeBtn {
 	font-weight: bold;
 }
+
+.btnPagination {
+	padding: 0 2px;
+}
+
+.btnPaginator {
+	display: inline-block;
+	padding: 5px;
+	border: solid 1px #000;
+}

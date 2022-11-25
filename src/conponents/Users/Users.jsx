@@ -3,23 +3,9 @@ import s from "./Users.module.css";
 import { NavLink } from "react-router-dom";
 import userPhoto from '../../assets/usersAvatar/user_avatar.png'
 import Preloader from '../../preloader/Preloader'
+import Pagination from "./Pagination";
 
 function Users(props) {
-	let pageCount = Math.ceil( props.totalCountUsers / props.countUsersPage);
-
-	let pages  = [];
-	for(let i = 1; i <= pageCount; i++){
-		pages.push(i);
-	}
-
-	let pagesButton = pages.map( (p) => {
-		return (
-			<button key={p} className={props.currentPage === p ? s.activeBtn : ''} onClick={() => {props.onChengedPage(p)}}>{p}</button>
-		)
-	})
-
-
-
   let usersElement = props.users.map((u) => (
     <div className={s.userBlock} key={u.id}>
       <div className={s.info}>
@@ -48,7 +34,7 @@ function Users(props) {
 		<>
 			{props.isFetch ? <Preloader/> : null}
 			<div className={s.usersContainer}>
-				{pagesButton}
+				<Pagination totalCountUsers={props.totalCountUsers} countUsersPage={props.countUsersPage} currentPage={props.currentPage} onChengedPage={props.onChengedPage} portionSize={props.portionSize}/>
 				{usersElement}
 			</div>
 		</>

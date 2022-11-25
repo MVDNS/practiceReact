@@ -8,7 +8,6 @@ const StatusProfileWithHooks = (props) => {
 	let [status, setStatus] = useState(props.userStatus)
 
 	useEffect( () => {
-		console.log(props.userStatus)
 		setStatus(props.userStatus)
 	}, [props.userStatus] )
 

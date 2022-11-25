@@ -43,9 +43,6 @@ export const UserApi = {
 
 	getPage(currentPage = 1, countUsersPage = 4) {
 		return instanse.get(`users?page=${currentPage}&count=${countUsersPage}`)
-			.then(response => {
-				return response.data
-			})
 	}
 }
 
@@ -58,6 +55,15 @@ export const profileAPI = {
 	},
 	updateUserStatus(status) {
 		return instanse.put(`/profile/status`, { status })
+	},
+	savePhoto(file) {
+		const formData = new FormData();
+		formData.append('image', file)
+		return instanse.put(`/profile/photo`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		})
 	}
 }
 

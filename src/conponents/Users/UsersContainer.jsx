@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
-import { follow, unfollow, getUsers} from "../../state/usersReducer";
+import { follow, unfollow, getUsers, setCurrentPage, setUsers} from "../../state/usersReducer";
 import { compose } from "redux";
-import { getCountUsersPage, getCurrentPage, getIsFetch, getIsFollowProcessing, getTotalCountUsers, getUsersSelector } from "../../state/user-selectors";
+import { getCountUsersPage, getCurrentPage, getIsFetch, getIsFollowProcessing, getTotalCountUsers, getUsersSelector, getPortionSize } from "../../state/user-selectors";
 
 class UsersAPIContainer extends React.Component {
 
@@ -13,6 +13,12 @@ class UsersAPIContainer extends React.Component {
 			this.props.getUsers(this.props.currentPage, this.props.countUsersPage);
 		}
 	}
+
+	componentWillUnmount() {
+		this.props.setCurrentPage(1);
+		this.props.setUsers([])
+	}
+
 	onChengedPage = (page) => {
 			this.props.getUsers(page, this.props.countUsersPage);
 		}
@@ -23,6 +29,7 @@ class UsersAPIContainer extends React.Component {
 			totalCountUsers={this.props.totalCountUsers}
 			countUsersPage={this.props.countUsersPage}
 			currentPage={this.props.currentPage}
+			portionSize={this.props.portionSize}
 			users={this.props.users}
 			isFetch={this.props.isFetch}
 			follow={this.props.follow}
@@ -82,6 +89,7 @@ const useStateToProps = (state) => {
 		totalCountUsers: getTotalCountUsers(state),
 		countUsersPage: getCountUsersPage(state),
 		currentPage: getCurrentPage(state),
+		portionSize: getPortionSize(state),
 		isFetch: getIsFetch(state),
 		isFollowProcess: getIsFollowProcessing(state),
   };
@@ -115,7 +123,7 @@ const useStateToProps = (state) => {
 // };
 
 const UsersContainer = compose(
-	connect(useStateToProps, {follow, unfollow, getUsers})
+	connect(useStateToProps, {follow, unfollow, getUsers, setCurrentPage, setUsers})
 )(UsersAPIContainer)
 
 export default UsersContainer;

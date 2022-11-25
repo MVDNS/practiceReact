@@ -3,7 +3,7 @@ import { profileAPI } from '../api/api'
 const SEND_NEW_POST = 'SEND-NEW-POST';
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
-
+const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
 
 let initialState = {
 	profile: null,
@@ -39,6 +39,16 @@ const profileReducer = (state = initialState, action) => {
 				...state,
 				userStatus: action.userStatus
 			};
+		case UPLOAD_PHOTO_SUCCESS: {
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					photos: { ...action.photoFile }
+				},
+
+			}
+		}
 		default:
 			return state;
 	}
@@ -66,9 +76,16 @@ const setUserStatus = (userStatus) => {
 	}
 }
 
+const setUploadPhotoSuccess = (photoFile) => {
+	return {
+		type: UPLOAD_PHOTO_SUCCESS,
+		photoFile
+	}
+}
+
 export const getProfileUser = (userId) => async (dispatch) => {
 	let promise = await profileAPI.getUserProfile(userId)
-	dispatch(setProfileUser(promise))
+	dispatch(setProfileUser(promise.data))
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {
@@ -81,7 +98,13 @@ export const updateUserStatus = (status) => async (dispatch) => {
 	if (promise.data.resultCode === 0) {
 		dispatch(setUserStatus(status))
 	}
+}
 
+export const loadPhoto = (file) => async (dispatch) => {
+	let promise = await profileAPI.savePhoto(file)
+	if (promise.data.resultCode === 0) {
+		dispatch(setUploadPhotoSuccess(promise.data.data.photos))
+	}
 }
 
 

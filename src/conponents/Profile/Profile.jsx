@@ -8,7 +8,7 @@ function Profile(props) {
 	
   return (
     <div className={s.profile}>
-      <DataInfo profile={props.profile} userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
+      <DataInfo loadPhoto={props.loadPhoto} profile={props.profile} userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
       <MyPostContainer />
     </div>
   );

@@ -1,4 +1,3 @@
-
 .data {
 	display: flex;
 	align-items: center;
@@ -27,7 +26,28 @@
 	margin-bottom: 5px;
 }
 
-.city{
+.city {
 	font-size: 16px;
 }
 
+.btnLoad {
+	visibility: hidden;
+	display: none;
+}
+
+.loadForm {
+	margin-top: 15px;
+	border-radius: 10px;
+	color: #fff;
+}
+
+.labelForLoad {
+	padding: 10px 5px;
+	border-radius: 10px;
+	transition: background-color 0.3s ease;
+	background-color: #2f80ed;
+}
+
+.labelForLoad:hover {
+	background-color: #649fed;
+}

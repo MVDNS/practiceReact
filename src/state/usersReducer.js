@@ -10,8 +10,9 @@ const TOGGLE_IS_FOLLOW = 'TOGGLE_IS_FOLLOW'
 
 let initialState = {
 	users: [],
+	portionSize: 20,
 	totalCountUsers: 0,
-	countUsersPage: 4,
+	countUsersPage: 10,
 	currentPage: 1,
 	isFetch: false,
 	isFollowProcessing: []
@@ -136,8 +137,8 @@ export const getUsers = (currentPage, countUsersPage) => async (dispatch) => {
 	dispatch(toggleIsFetch(true))
 	let promise = await UserApi.getPage(currentPage, countUsersPage)
 	dispatch(toggleIsFetch(false))
-	dispatch(setUsers(promise.items))
-	dispatch(setTotalCountUsers(12))
+	dispatch(setUsers(promise.data.items))
+	dispatch(setTotalCountUsers(promise.data.totalCount))
 }
 
 const followUnfollow = async (dispatch, method, userId, success) => {
