@@ -15,7 +15,8 @@ export function withRouter(Children){
 }
 
 class ProfileAPI extends React.Component {
-	componentDidMount (){
+	
+	refresProfile() {
 		let userId = this.props.match.params.userId;
 		if(!userId){
 			userId = this.props.autorizedUserId
@@ -26,6 +27,17 @@ class ProfileAPI extends React.Component {
 			this.props.getProfileUser(userId)
 			this.props.getUserStatus(userId)
 	}
+
+	componentDidMount (){
+		this.refresProfile()
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.match.params.userId !== this.props.match.params.userId){
+			this.refresProfile()
+		}
+	}
+
 	render (){
 		return (
 			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus} loadPhoto={this.props.loadPhoto}/>
