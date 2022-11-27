@@ -5,11 +5,20 @@
 	margin-bottom: 20px;
 }
 
+.avatarBlock {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: flex-start;
+
+}
+
 .avatar {
 	width: 200px;
 	height: 200px;
 	border-radius: 50%;
 	overflow: hidden;
+	margin-bottom: 20px;
 }
 
 .info {
@@ -36,7 +45,7 @@
 }
 
 .loadForm {
-	margin-top: 15px;
+	height: 40px;
 	border-radius: 10px;
 	color: #fff;
 }
@@ -49,5 +58,29 @@
 }
 
 .labelForLoad:hover {
+	background-color: #649fed;
+}
+
+.statusProfile {
+	margin-bottom: 10px;
+}
+
+.contacts div {
+	margin-left: 10px;
+}
+
+.profileButtons {
+	text-align: center;
+}
+
+.changeProfile button {
+	padding: 10px 5px;
+	border-radius: 10px;
+	transition: background-color 0.3s ease;
+	background-color: #2f80ed;
+	color: #fff;
+}
+
+.changeProfile button:hover {
 	background-color: #649fed;
 }

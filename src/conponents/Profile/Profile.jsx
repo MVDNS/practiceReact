@@ -5,10 +5,10 @@ import { Navigate } from "react-router-dom";
 
 function Profile(props) {
 	//if(!props.isAuth) return <Navigate to='/login' />
-	
   return (
     <div className={s.profile}>
-      <DataInfo loadPhoto={props.loadPhoto} profile={props.profile} userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
+			
+      <DataInfo loadPhoto={props.loadPhoto} profile={props.profile} userStatus={props.userStatus} updateUserStatus={props.updateUserStatus} isOwner={props.isOwner}/>
       <MyPostContainer />
     </div>
   );

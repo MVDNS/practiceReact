@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Profile from "./Profile";
 import { getProfileUser, getUserStatus, updateUserStatus, loadPhoto } from '../../state/profileReducer'
 import { connect } from "react-redux";
@@ -15,7 +15,6 @@ export function withRouter(Children){
 }
 
 class ProfileAPI extends React.Component {
-	
 	refresProfile() {
 		let userId = this.props.match.params.userId;
 		if(!userId){
@@ -40,7 +39,7 @@ class ProfileAPI extends React.Component {
 
 	render (){
 		return (
-			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus} loadPhoto={this.props.loadPhoto}/>
+			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus} loadPhoto={this.props.loadPhoto} isOwner={!this.props.match.params.userId}/>
 		)
 	}
 };
