@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Profile from "./Profile";
-import { getProfileUser, getUserStatus, updateUserStatus, loadPhoto } from '../../state/profileReducer'
+import { getProfileUser, getUserStatus, updateUserStatus, loadPhoto, updateProfileData } from '../../state/profileReducer'
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
@@ -39,7 +39,12 @@ class ProfileAPI extends React.Component {
 
 	render (){
 		return (
-			<Profile {...this.props} userStatus={this.props.userStatus} updateUserStatus={this.props.updateUserStatus} loadPhoto={this.props.loadPhoto} isOwner={!this.props.match.params.userId}/>
+			<Profile {...this.props} 
+			userStatus={this.props.userStatus} 
+			updateUserStatus={this.props.updateUserStatus} 
+			loadPhoto={this.props.loadPhoto} 
+			isOwner={!this.props.match.params.userId}
+			updateProfileData={this.props.updateProfileData}/>
 		)
 	}
 };
@@ -56,7 +61,7 @@ const useStateToProps = (state) => {
 let ProfileContainer = compose(
 	withRouter,
 	withAuthRedirect,
-	connect(useStateToProps, {getProfileUser, getUserStatus, updateUserStatus, loadPhoto}),
+	connect(useStateToProps, {getProfileUser, getUserStatus, updateUserStatus, loadPhoto, updateProfileData}),
 )(ProfileAPI)
 
 export default ProfileContainer;

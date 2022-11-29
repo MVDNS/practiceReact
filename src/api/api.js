@@ -64,6 +64,10 @@ export const profileAPI = {
 				'Content-Type': 'multipart/form-data'
 			}
 		})
+	},
+	updateProfile(dataProfile) {
+		console.log(dataProfile)
+		return instanse.put('/profile', dataProfile)
 	}
 }
 

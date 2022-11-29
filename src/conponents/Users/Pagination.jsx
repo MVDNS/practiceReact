@@ -14,8 +14,6 @@ const Pagination = ({totalCountUsers, countUsersPage, currentPage, onChengedPage
 	let [portionNumber, setPortionNumber] = useState(1)
 	let farLeftElemPortion = (portionNumber - 1) * portionSize + 1;
 	let farRightElemPortion = portionNumber * portionSize;
-
-	
 	
 	const	prevPortion = () => {
 		setPortionNumber(portionNumber - 1)
@@ -26,8 +24,6 @@ const Pagination = ({totalCountUsers, countUsersPage, currentPage, onChengedPage
 		setPortionNumber(portionNumber + 1)
 		onChengedPage(farRightElemPortion+1)
 		}
-
-		console.log('порция=' + portionNumber + ', крайний левый=' + farLeftElemPortion + ', крайний правый=' +  farRightElemPortion+ ', текущая=' + currentPage)
 	return (
 		<div className={s.paginator}>
 			{portionNumber > 1 && <button className={s.btnPaginator} onClick={() => {prevPortion()}}>prev</button>}

@@ -1,7 +1,9 @@
 import React from "react";
 import {Formik, Form, Field} from 'formik'
+import s from '../DataInfo.module.css';
 
-const ProfileInfoForm = ({profile}) => {
+const ProfileInfoForm = ({profile, setEditModeProfile, updateProfileData}) => {
+	
 	return (
 		<div>
      <Formik
@@ -15,8 +17,10 @@ const ProfileInfoForm = ({profile}) => {
        
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
-           alert(JSON.stringify(values, null, 2));
-           setSubmitting(false);
+					updateProfileData(values)
+           //alert(JSON.stringify(values, null, 2));
+					setEditModeProfile(false)
+          setSubmitting(false);
          }, 400);
        }}
      >
@@ -24,23 +28,23 @@ const ProfileInfoForm = ({profile}) => {
 				isSubmitting,
 			 	values }) => (
          <Form>
-					<div>
-           <Field type="text" name="fullName" placeholder={"fullName"} value={values.fullName}/>
+					<div>Full name:
+           <Field className={s.contactsForm} type="text" name="fullName" placeholder={"fullName"} value={values.fullName}/>
+					</div>
+					<div>About me:
+           <Field className={s.contactsForm} type="text" name="aboutMe" placeholder={"aboutMe"} value={values.aboutMe}/>
 					</div>
 					<div>
-           <Field type="text" name="aboutMe" placeholder={"aboutMe"} value={values.aboutMe}/>
+           <Field className={s.contactsForm} type="checkbox" name="lookingForAJob" placeholder={"lookingForAJob"}/> Looking for a job
 					</div>
-					<div>
-           <Field type="checkbox" name="lookingForAJob" placeholder={"lookingForAJob"}/> Looking for a job
-					</div>
-					<div>
-           <Field type="textarea" name="lookingForAJobDescription" placeholder={"lookingForAJobDescription"} value={values.lookingForAJobDescription}/>
+					<div>Looking for a job description:
+           <Field className={s.contactsForm} type="textarea" name="lookingForAJobDescription" placeholder={"lookingForAJobDescription"} value={values.lookingForAJobDescription}/>
 					</div>
 					{
-					 Object.keys(values.contacts).map( contact => <div key={contact}><Field type="text" name={'contacts.' + contact} placeholder={contact} value={values.contacts[contact] || ''}/></div>)
+					 Object.keys(values.contacts).map( contact => <div key={contact} className={s.contactsForm}> {contact + ':'} <Field type="text" name={'contacts.' + contact} placeholder={contact} value={values.contacts[contact] || ''}/></div>)
 					}
            <button type="submit" disabled={isSubmitting}>
-             Submit
+             Save changes
            </button>
          </Form>
        )}

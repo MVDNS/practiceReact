@@ -12,7 +12,9 @@ const StatusProfileWithHooks = (props) => {
 	}, [props.userStatus] )
 
 	let activateEditStatus = () => {
-		setEditMode(true)
+		if(props.isOwner){
+			setEditMode(true)
+		}
 	} 
 
 	let deactivateEditStatus = () => {
@@ -26,7 +28,7 @@ const StatusProfileWithHooks = (props) => {
 
 	return (
 		<>
-			{editMode 
+			{editMode
 			? <input onBlur={deactivateEditStatus} autoFocus={true} onChange={onStatusChange} value={status}/> 
 			: <span onClick={activateEditStatus}>{props.userStatus || 'Нет статуса'}</span>
 		}	

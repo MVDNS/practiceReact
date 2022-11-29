@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 function DataInfo(props) {
 
+	console.log(props)
 	let [editModeProfile, setEditModeProfile] = useState(false)
 	const handleChange = (e) => {
 		props.loadPhoto(e.target.files[0])
@@ -41,10 +42,10 @@ function DataInfo(props) {
 					<div className={s.aboutMe}>О себе: {props.profile.aboutMe}</div>
 					<div className={s.contacts}>Контакты: { props.profile.contacts.vk}</div> */}
 					<div className={s.statusProfile}>
-					<b>Status: </b><StatusProfileWithHooks userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
+					<b>Status: </b><StatusProfileWithHooks userStatus={props.userStatus} updateUserStatus={props.updateUserStatus} isOwner={props.isOwner}/>
 					</div>
 					{editModeProfile 
-					? <ProfileInfoForm profile={props.profile} setEditModeProfile={setEditModeProfile}/> 
+					? <ProfileInfoForm profile={props.profile} setEditModeProfile={setEditModeProfile} updateProfileData={props.updateProfileData}/> 
 					: <ProfileInfo profile={props.profile} setEditModeProfile={setEditModeProfile} isOwner={props.isOwner}/>}
 				</div>
 			</div>
