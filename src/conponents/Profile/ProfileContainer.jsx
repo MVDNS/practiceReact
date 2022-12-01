@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Profile from "./Profile";
 import { getProfileUser, getUserStatus, updateUserStatus, loadPhoto, updateProfileData } from '../../state/profileReducer'
 import { connect } from "react-redux";
@@ -54,7 +54,8 @@ const useStateToProps = (state) => {
 		profile: state.profilePage.profile,
 		userStatus: state.profilePage.userStatus,
 		isAuth: state.auth.isAuth,
-		autorizedUserId: state.auth.userId
+		autorizedUserId: state.auth.userId,
+		
 	}
 } 
 

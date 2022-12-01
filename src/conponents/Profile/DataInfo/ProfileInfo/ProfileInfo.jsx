@@ -2,7 +2,6 @@ import React from "react"
 import s from '../DataInfo.module.css';
 
 const ProfileInfo = ({profile}) => {
-	console.log(profile.contacts)
 	return (
 		<div>
 			<div>
@@ -25,7 +24,6 @@ const ProfileInfo = ({profile}) => {
 }
 
 const Contacts = ({contacts}) => {
-	console.log(contacts)
 	return (
 		<div>
 			{Object.keys(contacts).map( c => <div key={c}> <b>{c}:</b> {contacts[`${c}`]}  </div>)}

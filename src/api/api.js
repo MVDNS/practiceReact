@@ -16,8 +16,8 @@ export const UserApi = {
 			})
 	},
 
-	getLogin(email, password, rememberMe) {
-		return instanse.post(`auth/login?`, { email, password, rememberMe })
+	getLogin(email, password, rememberMe, captcha) {
+		return instanse.post(`auth/login?`, { email, password, rememberMe, captcha })
 	},
 
 	getLogOut() {
@@ -51,23 +51,28 @@ export const profileAPI = {
 		return instanse.get(`profile/${userId}`)
 	},
 	getUserStatus(userId) {
-		return instanse.get(`/profile/status/${userId}`)
+		return instanse.get(`profile/status/${userId}`)
 	},
 	updateUserStatus(status) {
-		return instanse.put(`/profile/status`, { status })
+		return instanse.put(`profile/status`, { status })
 	},
 	savePhoto(file) {
 		const formData = new FormData();
 		formData.append('image', file)
-		return instanse.put(`/profile/photo`, formData, {
+		return instanse.put(`profile/photo`, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
 		})
 	},
 	updateProfile(dataProfile) {
-		console.log(dataProfile)
-		return instanse.put('/profile', dataProfile)
+		return instanse.put('profile', dataProfile)
+	}
+}
+
+export const securityAPI = {
+	getCaptcha() {
+		return instanse.get('/security/get-captcha-url')
 	}
 }
 

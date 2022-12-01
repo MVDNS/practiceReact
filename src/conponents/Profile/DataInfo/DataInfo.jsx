@@ -8,8 +8,6 @@ import ProfileInfoForm from './ProfileInfo/ProfileInfoForm'
 import { useState } from 'react';
 
 function DataInfo(props) {
-
-	console.log(props)
 	let [editModeProfile, setEditModeProfile] = useState(false)
 	const handleChange = (e) => {
 		props.loadPhoto(e.target.files[0])

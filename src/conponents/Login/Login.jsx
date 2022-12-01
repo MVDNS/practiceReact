@@ -10,9 +10,9 @@ import s from './Login.module.css'
 const LoginForm = (props) => {
 	const submit = (values, { setSubmitting, resetForm, setErrors }) => {
 		setTimeout(() => {
-			props.loginUser(values.email, values.password, values.rememberMe, setErrors)
+			props.loginUser(values.email, values.password, values.rememberMe, setErrors, values.captcha)
 			setSubmitting(false);
-			resetForm();
+			//resetForm();
 		}, 0);
 	}
 	return (
@@ -21,7 +21,9 @@ const LoginForm = (props) => {
        initialValues={{ 
 				email: '', 
 				password: '', 
-				rememberMe: false }}
+				rememberMe: false,
+				captcha: '',	
+			}}
 				validate={values => {
 					const errors = {};
 						if (!values.email) {
@@ -55,6 +57,9 @@ const LoginForm = (props) => {
 					<div>
 					<Field name='rememberMe' type='checkbox'/> Запомнить меня
 					</div>
+					{props.captchaUrl && <img src={props.captchaUrl} alt='gg'/>}
+					{props.captchaUrl && <div><Field name='captcha' type='text' placeholder={'captcha'} value={values.captcha}/></div>}
+
 					<div>
 					<button type='submit' disabled={isSubmitting}>
              Отправить
@@ -75,14 +80,15 @@ const Login = (props) => {
  return (
 	<div>
 		<h1>Login page</h1>
-		<LoginForm loginUser={props.getLoginUser}/>
+		<LoginForm loginUser={props.getLoginUser} captchaUrl={props.captcha}/>
 	</div>
  )
 }
 
 const useStateToProps = (state) => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		captcha: state.auth.captchaUrl
 	}
 }
 

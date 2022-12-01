@@ -1,7 +1,7 @@
 import MyPostContainer from "./MyPost/MyPostContainer";
 import DataInfo from "./DataInfo/DataInfo";
 import s from "./Profile.module.css";
-import { Navigate } from "react-router-dom";
+//import { Navigate } from "react-router-dom";
 
 function Profile(props) {
 	//if(!props.isAuth) return <Navigate to='/login' />

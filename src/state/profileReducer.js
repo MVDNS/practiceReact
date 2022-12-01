@@ -4,7 +4,6 @@ const SEND_NEW_POST = 'SEND-NEW-POST';
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
-const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
 
 let initialState = {
 	profile: null,
@@ -49,11 +48,6 @@ const profileReducer = (state = initialState, action) => {
 				},
 			}
 		}
-		case UPDATE_PROFILE_SUCCESS: {
-			return {
-
-			}
-		}
 		default:
 			return state;
 	}
@@ -88,12 +82,6 @@ const setUploadPhotoSuccess = (photoFile) => {
 	}
 }
 
-const updateProfileSuccess = (dataProfile) => {
-	return {
-		type: UPDATE_PROFILE_SUCCESS,
-		dataProfile
-	}
-}
 
 export const getProfileUser = (userId) => async (dispatch) => {
 	let promise = await profileAPI.getUserProfile(userId)
@@ -119,12 +107,14 @@ export const loadPhoto = (file) => async (dispatch) => {
 	}
 }
 
-export const updateProfileData = (dataProfile) => async (dispatch, getState) => {
+export const updateProfileData = (dataProfile, setErrors) => async (dispatch, getState) => {
 	const userId = getState().auth.userId
 	let promise = await profileAPI.updateProfile(dataProfile)
 	if (promise.data.resultCode === 0) {
-		console.log(promise.data)
 		dispatch(getProfileUser(userId));
+	} else {
+		setErrors({ apiError: `${promise.data.messages[0]}` })
+		return Promise.reject(promise.data.messages[0])
 	}
 }
 

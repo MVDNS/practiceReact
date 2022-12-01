@@ -71,7 +71,13 @@
 
 .contactsForm {
 	margin-bottom: 5px;
-	margin-left: 5px;
+	margin-left: 10px;
+}
+
+.error {
+	border: solid red 2px;
+	padding: 5px;
+	border-radius: 5px;
 }
 
 .profileButtons {
